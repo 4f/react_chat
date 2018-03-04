@@ -1,0 +1,107 @@
+{
+  "chats": [
+    {
+      "title": "Harvey Moss",
+      "id": 1
+    }, {
+      "title": "Marjorie Atnip",
+      "id": 2
+    }, {
+      "title": "Heather Richardson",
+      "id": 3
+    }, {
+      "title": "Alma Greenfeild",
+      "id": 4
+    }, {
+      "title": "Jim Bos",
+      "id": 5
+    }, {
+      "title": "Henry Willson",
+      "id": 6
+    }, {
+      "title": "Alma Reed",
+      "id": 7
+    }, {
+      "title": "John Joy",
+      "id": 8
+    }, {
+      "title": "Barny Bons",
+      "id": 9
+    }, {
+      "title": "Larry Hire",
+      "id": 10
+    }, {
+      "title": "Harvey Moss",
+      "id": 11
+    }, {
+      "title": "Philip Taylor",
+      "id": 12
+    }, {
+      "title": "Frank Underwood",
+      "id": 13
+    }, {
+      "title": "Claire Underwood",
+      "id": 14
+    }],
+  "messages": [{
+    "sender": "someone",
+    "id": 1,
+    "content": "Hello, World!"
+  }, {
+    "sender": "someone",
+    "id": 2,
+    "content": "Here's my very first message..."
+  }, {
+    "sender": "me",
+    "id": 3,
+    "content": "Oh, hi 👋🏻"
+  }, {
+    "sender": "me",
+    "id": 4,
+    "content": "What's up?"
+  }, {
+    "sender": "me",
+    "id": 5,
+    "content": "Everything is up, buddy 😎"
+  }, {
+    "sender": "someone",
+    "id": 6,
+    "content": "Neat 👍🏻\nKeep rocking"
+  }, {
+    "sender": "someone",
+    "id": 7,
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+  }, {
+    "sender": "me",
+    "id": 8,
+    "content": "What's that?"
+  }, {
+    "sender": "someone",
+    "id": 9,
+    "content": "That's a HUUUUUGGGEEEE message!!11"
+  }, {
+    "sender": "me",
+    "id": 10,
+    "content": "LOL"
+  }, {
+    "sender": "someone",
+    "id": 11,
+    "content": "Wanna more?"
+  }, {
+    "sender": "me",
+    "id": 12,
+    "content": "Sure 😁"
+  }, {
+    "sender": "someone",
+    "id": 13,
+    "content": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
+  }, {
+    "sender": "me",
+    "id": 14,
+    "content": "I can do this too!"
+  }, {
+    "sender": "me",
+    "id": 15,
+    "content": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga."
+  }]
+}
