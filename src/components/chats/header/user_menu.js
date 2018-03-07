@@ -8,19 +8,12 @@ import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button'
 import TextField from 'material-ui/TextField'
+import { ListItemIcon, ListItemText } from 'material-ui/List'
 
-const styles = theme => ({
-  modalWrapper: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  modal: {
-    width: '30%',
-    minWidth: '300px',
-    padding: theme.spacing.unit * 3
-  }
-});
+import InboxIcon from 'material-ui-icons/ExitToApp'
+import DraftsIcon from 'material-ui-icons/Edit'
+
+import {UserMenu as styles} from 'styles/chats/header'
 
 class UserMenu extends React.Component {
   state = {
@@ -28,23 +21,13 @@ class UserMenu extends React.Component {
     anchorEl: null,
     username: 'tmp',
     firstName: 'hi2',
-    lastName: 'hi3',
+    lastName: 'hi3'
   }
 
 
-  handleClick = (event) => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
-
-  handleClose = () => {
-    this.setState({ anchorEl: null });
-  };
-
-  handleInputChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
-  }
+  handleClick = (event) => this.setState({ anchorEl: event.currentTarget })
+  handleInputChange = (event) => this.setState({ [event.target.name]: event.target.value })
+  handleClose = () => this.setState({ anchorEl: null })
 
   toggleEditProfileModal = () => {
     this.setState({ isModalOpen: !this.state.isModalOpen })
@@ -66,8 +49,8 @@ class UserMenu extends React.Component {
   }
 
   render() {
-    const { anchorEl, isModalOpen } = this.state;
-    const { classes, disabled } = this.props;
+    const { anchorEl, isModalOpen } = this.state
+    const { classes, disabled } = this.props
 
     return (
       <React.Fragment>
@@ -77,17 +60,29 @@ class UserMenu extends React.Component {
           aria-haspopup="true"
           disabled={disabled}
           onClick={this.handleClick}
+          onMouseEnter={this.handleClick}
+          
         >
           <AccountCircle />
         </IconButton>
-        <Menu
-          id="simple-menu"
+        <Menu id="simple-menu"
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
+          onMouseLeave={this.handleClose}
         >
-         <MenuItem onClick={this.toggleEditProfileModal}>Edit Profile</MenuItem>
-         <MenuItem onClick={this.handleLogoutClick}>Logout</MenuItem>
+          <MenuItem className={classes.menuItem} onClick={this.toggleEditProfileModal}>
+            <ListItemIcon>
+              <DraftsIcon className={classes.icon} />
+            </ListItemIcon>
+            <ListItemText inset primary="Edit Profile" />
+          </MenuItem>
+          <MenuItem className={classes.menuItem} onClick={this.handleLogoutClick}>
+            <ListItemIcon>
+              <InboxIcon className={classes.icon} />
+            </ListItemIcon>
+            <ListItemText inset primary="Logout" />
+          </MenuItem>
         </Menu>
         <Modal
           open={isModalOpen}
@@ -138,8 +133,8 @@ class UserMenu extends React.Component {
           </Paper>
         </Modal>
       </React.Fragment>
-    );
+    )
   }
 }
 
-export default withStyles(styles)(UserMenu);
+export default withStyles(styles)(UserMenu)

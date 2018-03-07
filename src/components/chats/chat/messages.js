@@ -4,7 +4,7 @@ import { withStyles } from 'material-ui/styles'
 import Typography from 'material-ui/Typography'
 import Paper from 'material-ui/Paper'
 import Message from './message'
-import styles from 'styles/ChatMessageList'
+import {Messages as styles} from 'styles/chats/chat'
 
 class ChatMessageList extends React.Component {
   componentDidMount() { this.scrollDownHistory() }

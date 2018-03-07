@@ -8,7 +8,7 @@ import Avatar from 'components/Avatar'
 import ChatMenu from './menu'
 import UserMenu from './user_menu'
 
-import styles from 'styles/chats/header'
+import {Header as styles} from 'styles/chats/header'
 
 class ChatHeader extends React.Component {
   render() {

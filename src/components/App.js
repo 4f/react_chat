@@ -9,7 +9,7 @@ import PrivateRoute from 'containers/PrivateRoute'
 import WelcomePage from 'containers/WelcomePage'
 import Chats from 'containers/chats'
 
-import styles from 'styles/App'
+import styles from 'styles/app'
 
 
 const store = configureStore()

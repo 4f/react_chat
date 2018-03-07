@@ -4,7 +4,7 @@ import Paper from 'material-ui/Paper'
 import Button from 'material-ui/Button'
 import Input from 'material-ui/Input'
 
-import styles from 'styles/MessageInput'
+import {Input as styles} from 'styles/chats/chat'
 
 class MessageInput extends React.Component {
   state = { value: '' }

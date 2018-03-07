@@ -4,7 +4,7 @@ import { withStyles } from 'material-ui/styles'
 import Messages from './messages'
 import InputMessage from './input'
 
-import styles from 'styles/Chat'
+import {Chat as styles} from 'styles/chats/chat'
 
 const Chat = ({ classes, messages }) => (
   <main className={classes.chatLayout}>

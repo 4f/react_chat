@@ -1,40 +1,31 @@
 import types from 'constants/auth'
-import callApi from 'utils/call-api'
+import {http} from 'utils/call-api'
 
-const register = (symbol) => (username, password) => (dispatch) => {
+const log = function(error){ console.info(error) }
+
+const thens = {
+  signup:  (json) => localStorage.setItem('token', json.token),
+  login:   (json) => localStorage.setItem('token', json.token),
+  logout:  (json) => localStorage.removeItem('token'),
+  session: (json) => {}
+}
+
+const register = (symbol) => (username, password) => (dispatch, getState) => {
   dispatch({ type: types[symbol].REQUEST })
-  return callApi(`/${symbol}`, undefined, { method: 'POST' }, { username, password })
-    .then(json => {
-      if (!json.token) throw new Error('Token has not been provided!');
-      localStorage.setItem('token', json.token)
-      dispatch({ type: types[symbol].SUCCESS, payload: json })
-    })
-    .catch(reason => dispatch({ type: types[symbol].FAILURE, payload: reason }))
+  let payload = !username ? undefined : {username, password}
+  return http({ type: types[symbol], dispatch, getState, payload })
+    .then(thens[symbol])
+    .catch(log)
 }
 
-export const signup = register("SIGNUP")
-export const login  = register("LOGIN")
+export const signup = register("signup")
+export const login  = register("login")
+export const logout  = register("logout")
+export const session  = register("session")
 
-
-export function logout() {
-  return (dispatch, getState) => { dispatch({ type: types.LOGOUT.REQUEST })
-    return callApi('/logout')
-      .then(json => {
-        localStorage.removeItem('token')
-        dispatch({ type: types.LOGOUT.SUCCESS, payload: json })
-      })
-      .catch(reason => dispatch({ type: types.LOGOUT.FAILURE, payload: reason }))
-  }
-}
-
-export function recieveAuth() {
-  return (dispatch, getState) => {
-    const { token } = getState().auth
-
-    dispatch({ type: types.RECIEVE_AUTH.REQUEST })
-
-    return callApi('/users/me', token)
-      .then(json => dispatch({ type: types.RECIEVE_AUTH.SUCCESS, payload: json }))
-      .catch(reason => dispatch({ type: types.RECIEVE_AUTH.FAILURE, payload: reason }))
-  }
+export default {
+  signup,
+  login,
+  logout,
+  session
 }

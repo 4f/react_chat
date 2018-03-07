@@ -8,7 +8,7 @@ import RestoreIcon from 'material-ui-icons/Restore'
 import ExploreIcon from 'material-ui-icons/Explore'
 import List from './list'
 import NewButton from './new'
-import styles from 'styles/Sidebar'
+import {Sidebar as styles} from 'styles/chats/sidebar'
 
 
 class Sidebar extends React.Component {
@@ -44,8 +44,8 @@ class Sidebar extends React.Component {
         />
         <NewButton onClick={alert} />
         <BottomNavigation value={activeTab} onChange={this.handleTabChange} showLabels >
-          <BottomNavigationAction label="My Chats" icon={<RestoreIcon />} />
-          <BottomNavigationAction label="Explore" icon={<ExploreIcon />} />
+          <BottomNavigationAction className={classes.tab} label="My Chats" icon={<RestoreIcon />} />
+          <BottomNavigationAction className={classes.tab} label="Explore" icon={<ExploreIcon />} />
         </BottomNavigation>
       </Drawer>
     )

@@ -3,7 +3,7 @@ import { withStyles } from 'material-ui/styles'
 import List from 'material-ui/List'
 import Typography from 'material-ui/Typography'
 import Item from './item'
-import styles from 'styles/ChatList'
+import {List as styles} from 'styles/chats/sidebar'
 
 const ChatList = ({ classes, chats }) => (
   <List className={classes.chatsList}>

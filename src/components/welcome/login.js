@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles } from 'material-ui';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
-import styles from 'styles/LoginForm'
+import {Login as styles} from 'styles/welcome'
 
 
 class LoginForm extends React.Component {

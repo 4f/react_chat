@@ -8,7 +8,7 @@ import Avatar from 'components/Avatar'
 
 import randomColor from 'utils/color-from'
 
-import styles from 'styles/ChatMessage'
+import {Message as styles} from 'styles/chats/chat'
 
 const ChatMessage = ({ classes, sender, content }) => {
   const isMessageFromMe = sender === 'me'

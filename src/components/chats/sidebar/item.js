@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { ListItem, ListItemText } from 'material-ui/List'
 import Avatar from 'components/Avatar'
 
-import styles from 'styles/ChatListItem'
+import {Item as styles} from 'styles/chats/sidebar'
 
 const ChatListItem = ({ classes, title }) => (
   <ListItem button >

@@ -1,13 +1,12 @@
 export default function titleInitials(title) {
   try {
     return title
-      .split(' ')
-      .map(word => word[0])
-      .map(char => char.toUpperCase())
-      .slice(0, 2)
-      .join('');
+      .match(/\b(\w)\w*\W*\b(\w)?/)
+      .slice(1, 3)
+      .join('')
+      .toUpperCase()
   } catch (e) {
-    console.error(e);
-    return '🐶';
+    console.error(e)
+    return 'ER'
   }
 }

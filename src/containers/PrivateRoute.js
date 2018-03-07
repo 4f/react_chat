@@ -2,12 +2,12 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter, Route, Redirect } from 'react-router-dom';
-import { recieveAuth } from 'actions/auth';
+import { session } from 'actions/auth';
 
 const pathname = '/welcome'
 
 class PrivateRoute extends React.Component {
-  componentDidMount() { this.props.recieveAuth() }
+  componentDidMount() { this.props.session() }
 
   render() {
     const { component, render, ...rest } = this.props
@@ -22,7 +22,7 @@ const mapStateToProps = state => ({
     state.auth.isAuth ? <Component {...props} /> : <Redirect to={{ pathname }} />
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
-  recieveAuth
+  session
 }, dispatch)
 
 export default withRouter( connect(

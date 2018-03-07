@@ -7,24 +7,7 @@ import Typography from 'material-ui/Typography';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 
-const styles = theme => ({
-  newChatButton: {
-    position: 'absolute',
-    left: 'auto',
-    right: theme.spacing.unit * 3,
-    bottom: theme.spacing.unit * 3 + 48, // + bottom navigation
-  },
-  modalWrapper: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  modal: {
-    width: '30%',
-    minWidth: '300px',
-    padding: theme.spacing.unit * 3
-  }
-});
+import {New as styles} from 'styles/chats/sidebar'
 
 class NewChatButton extends React.Component {
   state = {
