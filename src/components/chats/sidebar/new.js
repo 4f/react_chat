@@ -10,96 +10,55 @@ import TextField from 'material-ui/TextField';
 import {New as styles} from 'styles/chats/sidebar'
 
 class NewChatButton extends React.Component {
-  state = {
-    open: false,
-    title: {
-      value: '',
-      isValid: true,
-    }
-  }
+  state = { open: false, title: '' }
 
-  toggleModal = () => {
-    this.setState({ open: !this.state.open })
-  }
+  toggleModal = () => this.setState({ open: !this.state.open })
+  handleTitleChange = event => this.setState({ title: event.target.value })
+  reset = () => this.setState({ title: '', open: false })
+  isTitle = () => this.state.title !== ''
 
-  handleTitleChange = (event) => {
-    this.setState({
-      title: {
-        value: event.target.value,
-        isValid: true,
-      }
-    });
-  }
-
-  handleCreateClick = (event) => {
-    event.preventDefault();
-
-    const { title } = this.state;
-
-    if (!title.value) {
-      this.setState({
-        title: {
-          value: title.value,
-          isValid: false,
-        }
-      })
-
-      return;
-    }
-
-    this.props.onClick(title.value);
-    this.toggleModal();
-    this.setState({
-      title: {
-        value: '',
-        isValid: true,
-      },
-    });
+  onCreate = (event) => {
+    event.preventDefault()
+    if (!this.isTitle()) return
+    this.props.create({ title: this.state.title })
+    this.reset()
   }
 
   render() {
-    const { classes } = this.props;
-    const { open, title } = this.state;
+    const { classes } = this.props
+    const { open, title } = this.state
 
     return (
       <React.Fragment>
-        <Button
-          variant="fab"
-          color="primary"
+
+        <Button variant="fab" color="primary"
           className={classes.newChatButton}
           onClick={this.toggleModal}
         >
           <AddIcon />
         </Button>
+
         <Modal
           open={open}
           className={classes.modalWrapper}
           onClose={this.toggleModal}
         >
           <Paper className={classes.modal}>
-            <Typography variant="title" id="modal-title">
-              Create new chat
-            </Typography>
-            <TextField
-              required
-              fullWidth
-              label="New chat"
-              placeholder="Type the title..."
-              type="text"
-              margin="normal"
-              autoComplete="new-chat"
+
+            <Typography variant="title" id="modal-title"> Create new chat </Typography>
+            <TextField fullWidth type="text" margin="normal" autoComplete="new-chat" autoFocus
               value={title.value}
               onChange={this.handleTitleChange}
-              error={!title.isValid}
-            />
-            <Button
-              color="primary"
-              onClick={this.handleCreateClick}
-            >
-              Create
-            </Button>
+              error={!this.isTitle()}
+              label="New chat"
+              placeholder="Type the title..."
+              required />
+            <Button color="primary" onClick={this.onCreate} > Create </Button>
+            <Button color="primary" onClick={this.toggleModal} > Close </Button>
+            
           </Paper>
         </Modal>
+
       </React.Fragment>
     );
   }

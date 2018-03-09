@@ -17,7 +17,7 @@ export default function auth(state = initialState, action) {
     case types.login.FAILURE:
     case types.session.FAILURE:
     case types.logout.SUCCESS:
-      return { ...state, isAuth: false, user:   null, token:  '' }
+      return { ...state, isAuth: false, user: null, token:  '' }
 
     default:
       return state

@@ -28,70 +28,46 @@ class SignupForm extends React.Component {
     this.trySubmit()
     event.preventDefault()
     if (!this.checkRepeatedPassword()) return 
-    const { username, password } = this.state
-    this.props.onSubmit(username, password)
+    this.props.onSubmit(this.state)
   }
 
   render() {
-    const { classes } = this.props;
-    const { username, password, repeatedPassword } = this.state;
+    const { classes } = this.props
+    const { username, password, repeatedPassword } = this.state
 
     return (
       <form onSubmit={this.handleSubmit}>
-        <TextField
-          required
-          fullWidth
+        <TextField name="username" type="text" autoComplete="username" margin="normal" fullWidth autoFocus
           label="Username"
-          placeholder="Type your username..."
-          type="text"
-          margin="normal"
-          name="username"
-          autoComplete="username"
           value={username.value}
           onChange={this.handleInputChange}
           error={!this.checkUsername()}
-        />
-        <TextField
+          placeholder="Type your username..."
           required
-          fullWidth
+        />
+        <TextField name="password" type="password" margin="normal" fullWidth autoComplete="new-password"
           label="Password"
-          placeholder="Type your password..."
-          type="password"
-          margin="normal"
-          name="password"
-          autoComplete="new-password"
           value={password.value}
           onChange={this.handleInputChange}
           error={!this.checkPassword()}
-        />
-         <TextField
+          placeholder="Type your password..."
           required
-          fullWidth
+        />
+         <TextField name="repeatedPassword" type="password" fullWidth margin="normal" autoComplete="new-password"
           label="Repeat password"
           placeholder="Repeat your password..."
-          type="password"
-          margin="normal"
-          name="repeatedPassword"
-          autoComplete="new-password"
           value={repeatedPassword.value}
           onChange={this.handleInputChange}
           error={!this.checkRepeatedPassword()}
+          required
         />
-        <Button
-          fullWidth
-          variant="raised"
-          type="submit"
-          color="primary"
+        <Button type="submit" fullWidth variant="raised" color="primary"
           className={classes.signUpButton}
           onClick={this.trySubmit}
         >
           Signup
         </Button>
-        <Button
-          fullWidth
-          variant="raised"
-          type="reset"
-          color="secondary"
+        <Button type="reset" fullWidth variant="raised" color="secondary"
           className={classes.signUpButton}
           onClick={this.resetSubmit}
         >

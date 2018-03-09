@@ -12,7 +12,7 @@ import Signup from './signup'
 class WelcomePage extends React.Component {
   state = { activeTab: 0 }
 
-  componentDidMount() { this.props.actions.auth.session() }
+  // componentDidMount() { this.props.actions.auth.session() }
 
   handleTabChage = (event, value) => { this.setState({ activeTab: value }) }
 

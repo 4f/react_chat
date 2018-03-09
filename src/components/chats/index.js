@@ -3,32 +3,56 @@ import Sidebar from './sidebar'
 import Chat from 'components/chats/chat'
 import Header from 'components/chats/header'
 
+// import { messages } from 'mock-data'
 
-import { chats, messages } from 'mock-data'
 
 
 
 class ChatPage extends React.Component {
+
+
   componentDidMount() {
+    const { match: { params: {id} }, actions: { Chat: { active, all } } } = this.props
+
+    Promise.all([
+      all(),
+      // fetchMyChats(),
+    ])
+      .then(() => { if (id) active({ id }) })
   }
 
   componentWillReceiveProps(nextProps) {
-    const { match: { params }, setActiveChat } = this.props;
-    const { params: nextParams } = nextProps.match;
+    const { match: { params }, actions: {Chat: { active} } } = this.props
+    const { params: { id } } = nextProps.match
 
-    // If we change route, then fetch messages from chat by chatID
-    if (nextParams.chatId && params.chatId !== nextParams.chatId) {
-      setActiveChat(nextParams.chatId);
-    }
+    if( id && params.id !== id) active({ id })
   }
 
   render() {
-    const { logout } = this.props
+    const {user, chats, chat, actions: { logout, Chat: {join, leave, remove, create, send} }, messages} = this.props
     return (
       <React.Fragment>
-        <Header logout={logout} />
-        <Sidebar chats={chats} />
-        <Chat messages={messages} />
+        <Header
+          logout={logout} 
+          user={user}
+          chat={chat}
+          leaveChat={leave}
+          deleteChat={remove}
+          // editUser={editUser}
+        />
+        <Sidebar
+          chats={chats}
+          create={create}
+          chat={chat}
+          user={user}
+        />
+        <Chat
+          messages={messages} 
+          chat={chat}
+          user={user}
+          send={send}
+          join={join}
+        />
       </React.Fragment>
     )
   }

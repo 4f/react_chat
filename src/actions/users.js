@@ -1,5 +1,5 @@
-import * as types from '../constants/users';
-import callApi from '../utils/call-api';
+import  types from 'constants/users';
+import callApi from 'utils/call-api';
 
 export function editUser({ username, firstName, lastName }) {
   return (dispatch, getState) => {

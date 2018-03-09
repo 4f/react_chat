@@ -10,9 +10,8 @@ const thens = {
   session: (json) => {}
 }
 
-const register = (symbol) => (username, password) => (dispatch, getState) => {
+const register = (symbol) => (payload) => (dispatch, getState) => {
   dispatch({ type: types[symbol].REQUEST })
-  let payload = !username ? undefined : {username, password}
   return http({ type: types[symbol], dispatch, getState, payload })
     .then(thens[symbol])
     .catch(log)

@@ -12,35 +12,17 @@ import {Header as styles} from 'styles/chats/header'
 
 class ChatHeader extends React.Component {
   render() {
-    const { classes, activeUser, activeChat, logout, leaveChat, deleteChat, editUser } = this.props
+    const { classes, user, chat, logout, leaveChat, deleteChat, editUser } = this.props
 
     return (
-      <AppBar color="primary" className={classes.appBar}>
+      <AppBar className={classes.appBar} color="primary">
         <Toolbar color="contrast">
-          {activeChat ? (
-            <React.Fragment>
-              <Avatar colorFrom={activeChat._id}>
-                {activeChat.title}
-              </Avatar>
-              <Typography variant="title" className={classes.appBarTitle}>
-                {activeChat.title}
-                <ChatMenu
-                  activeUser={activeUser}
-                  onLeaveClick={() => leaveChat(activeChat._id)}
-                  onDeleteClick={() => deleteChat(activeChat._id)}
-                />
-              </Typography>
-            </React.Fragment>
-          ) : (
-            <Typography variant="title" className={classes.appBarTitle}>
-              DogeCodes React Chat
-            </Typography>
-          )}
-          <UserMenu
-            activeUser={activeUser}
-            onLogoutClick={logout}
-            onEditProfileClick={editUser}
-          />
+          {chat && 
+          <Avatar colorFrom={chat._id} label={chat.title} /> }
+          <Typography variant="title" className={classes.appBarTitle}>
+            <ChatMenu chat={chat} user={user} leave={leaveChat} delete={deleteChat} />
+          </Typography>
+          <UserMenu user={user} logout={logout} edit={editUser} />
         </Toolbar>
       </AppBar>
     )

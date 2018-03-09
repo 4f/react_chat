@@ -12,41 +12,31 @@ import {Sidebar as styles} from 'styles/chats/sidebar'
 
 
 class Sidebar extends React.Component {
-  state = {
-    activeTab: 0,
-    searchValue: ''
-  }
+  state = { activeTab: 0, searchValue: '' }
 
-  handleTabChange = (event, value) => this.setState({ activeTab: value })
+  onTabChange = (event, value) => this.setState({ activeTab: value })
 
-
+  
   render() {
-    const { classes, chats } = this.props
+    const { create, classes, chats, chat, user } = this.props
     const { activeTab, searchValue } = this.state
 
     return (
-      <Drawer
-        variant="permanent"
-        classes={{ paper: classes.drawerPaper }}
-      >
+      <Drawer classes={{ paper: classes.drawerPaper }} variant="permanent" >
+
         <div className={classes.drawerHeader}>
-          <TextField
-            fullWidth
-            margin="normal"
-            placeholder="Search chats..."
-            value={searchValue}
-          />
+          <TextField value={searchValue} fullWidth margin="normal" placeholder="Search chats..." />
         </div>
+
         <Divider />
-        <List
-          chats={chats}
-          activeChat={chats.active}
-        />
-        <NewButton onClick={alert} />
-        <BottomNavigation value={activeTab} onChange={this.handleTabChange} showLabels >
+        <List chats={chats} user={user} active={chat} />
+        <NewButton create={create} />
+
+        <BottomNavigation value={activeTab} onChange={this.onTabChange} showLabels >
           <BottomNavigationAction className={classes.tab} label="My Chats" icon={<RestoreIcon />} />
           <BottomNavigationAction className={classes.tab} label="Explore" icon={<ExploreIcon />} />
         </BottomNavigation>
+
       </Drawer>
     )
   }

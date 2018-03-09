@@ -4,59 +4,52 @@ import Menu, { MenuItem } from 'material-ui/Menu'
 import MoreIcon from 'material-ui-icons/MoreVert'
 
 class ChatMenu extends React.Component {
-  state = {
-    anchorEl: null,
+  state = { anchorEl: null }
+
+  open = (event) => this.setState({ anchorEl: event.currentTarget })
+  close = () =>  this.setState({ anchorEl: null })
+
+  leave = () => {
+    this.close()
+    this.props.leave({id: this.props.chat._id})
   }
 
-  handleClick = (event) => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
-
-  handleClose = () => {
-    this.setState({ anchorEl: null });
-  };
-
-  handleLeaveClick = () => {
-    this.handleClose();
-    this.props.onLeaveClick();
-  }
-
-  handleDeleteClick = () => {
-    this.handleClose();
-    this.props.onDeleteClick();
+  remove = () => {
+    this.close()
+    this.props.delete({id: this.props.chat._id})
   }
 
   render() {
-    const { activeUser, disabled } = this.props;
-    const { anchorEl } = this.state;
+    const { user, disabled, chat } = this.props
+    const { anchorEl } = this.state
 
-    if (!activeUser.isChatMember) {
-      return null;
-    }
-
+    if (!chat) return <React.Fragment> DogeCodes React Chat#1 </React.Fragment>
+    if (!user.isInChat) return null
+    
     return (
       <React.Fragment>
-        <IconButton
-          color="inherit"
-          aria-owns={anchorEl ? 'simple-menu' : null}
-          aria-haspopup="true"
-          disabled={disabled}
-          onClick={this.handleClick}
-        >
-          <MoreIcon />
-        </IconButton>
-        <Menu
-          id="simple-menu"
+        <div onMouseEnter={this.open} onClick={this.open}>
+          { chat.title }
+          <IconButton color="inherit" aria-haspopup="true"
+            aria-owns={anchorEl ? 'simple-menu' : null}
+            disabled={disabled}
+          >
+            <MoreIcon />
+          </IconButton>
+        </div>
+        <Menu id="simple-menu"
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
-          onClose={this.handleClose}
+          onClose={this.close}
         >
-          {activeUser.isMember && <MenuItem onClick={this.handleLeaveClick}>Leave</MenuItem>}
-          {activeUser.isCreator && <MenuItem onClick={this.handleDeleteClick}>Delete</MenuItem>}
+            {user.isMember &&
+          <MenuItem onClick={this.leave}>Leave</MenuItem>}
+            {user.isCreator &&
+          <MenuItem onClick={this.remove}>Delete</MenuItem>}
         </Menu>
       </React.Fragment>
-    );
+    )
   }
 }
 
-export default ChatMenu;
+export default ChatMenu

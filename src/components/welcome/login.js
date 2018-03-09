@@ -24,10 +24,9 @@ class LoginForm extends React.Component {
   }
 
   handleSubmit = (event) => {
-    const { username, password } = this.state
     event.preventDefault()
     this.trySubmit()
-    this.props.onSubmit(username, password)
+    this.props.onSubmit(this.state)
   };
 
   render() {
@@ -36,37 +35,25 @@ class LoginForm extends React.Component {
 
     return (
       <form onSubmit={this.handleSubmit}>
-        <TextField
-          required
-          fullWidth
+        <TextField fullWidth name="username" type="text" margin="normal" autoFocus
           label="Username"
-          placeholder="Type your username..."
-          type="text"
-          name="username"
-          margin="normal"
           value={username}
           onChange={this.handleInputChange}
           error={!this.checkUsername()}
-        />
-        <TextField
-          required
-          fullWidth
-          label="Password"
           placeholder="Type your username..."
-          type="password"
-          name="password"
-          margin="normal"
+          required
+        />
+        <TextField name="password" fullWidth type="password" margin="normal"
+          label="Password"
           value={password}
           onChange={this.handleInputChange}
           error={!this.checkPassword()}
+          placeholder="Type your username..."
+          required
         />
-        <Button
-          fullWidth
-          variant="raised"
-          type="submit"
-          color="primary"
-          onClick={this.trySubmit}
+        <Button type="submit" variant="raised" fullWidth color="primary"
           className={classes.signUpButton}
+          onClick={this.trySubmit}
         >
           Login
         </Button>

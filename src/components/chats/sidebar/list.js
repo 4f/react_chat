@@ -5,14 +5,18 @@ import Typography from 'material-ui/Typography'
 import Item from './item'
 import {List as styles} from 'styles/chats/sidebar'
 
-const ChatList = ({ classes, chats }) => (
+const ChatList = ({ classes, chats, user, active }) => (
   <List className={classes.chatsList}>
-    { chats && chats.length ? list(chats) : <Empty classes={classes} /> }
+    { chats && chats.length
+      ? 
+      chats.map((chat) => 
+        <Item key={chat._id} chat={chat} active={active} user={user}/>)
+      :
+      <Empty classes={classes} /> }
   </List>
 )
 
 
-const list = (chats) => chats.map((chat) => <Item key={chat.id} {...chat} />)
 const Empty = (props) => (
   <Typography variant="subheading" className={props.classes.noChats}>
     There is no chats yet...

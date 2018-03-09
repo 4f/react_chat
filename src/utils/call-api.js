@@ -2,10 +2,19 @@ import fetch from 'isomorphic-fetch'
 
 const BASE_URL = "http://localhost:8000/v1"
 
-export function http({ dispatch, getState, payload, type, type: {method} }){
+const preparePath = (path, opt) => path.replace(/:[^\/]*/g, str => opt[str.slice(1)])
+
+  // path.split(/(?:(?:^|\/)[^:]*)?\/:/)
+
+export function http({ dispatch, getState, payload, type, type: {method, path} }){
+  path = preparePath(path, payload)
+  console.log('path', path)
+  if(payload && !payload.username) payload = {data: payload }//login/signup have dif struct
+  
   dispatch({type: type.REQUEST })
   const token = getState && getState().auth.token
-  return callApi(type.path, token, { method }, payload)
+
+  return callApi(path, token, { method }, payload)
     .then(json => {
       dispatch({ type: type.SUCCESS, payload: json })
       return json
@@ -18,6 +27,7 @@ export function http({ dispatch, getState, payload, type, type: {method} }){
 
 export default function callApi(path, token, options, payload) {
   const authHeaders = token ? { 'Authorization': `Bearer ${token}` } : {}
+  if(!options.method || options.method !== 'POST') payload = undefined
 
   return fetch( `${BASE_URL}${path}`, {
     method: 'GET',
