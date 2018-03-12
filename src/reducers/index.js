@@ -8,3 +8,32 @@ export default combineReducers({
 })
 
 
+export function construct(state){
+  const activeChat = () => state.chats.chat
+
+  const isCreator = () => {
+    try {
+      return activeChat().creator._id === state.auth.user._id
+    } catch (e) {
+      return false
+    }
+  }
+
+  const isMember = () => {
+    try {
+      return activeChat().members.some( member => member._id === state.auth.user._id )
+    } catch (e) {
+      return false
+    }
+  }
+  return {
+    getCurrentUser: () => ({
+      ...state.auth.user,
+      isCreator: isCreator(),
+      isMember: isMember(),
+      isInChat: isCreator() || isMember()
+    }),
+  }
+  
+
+}

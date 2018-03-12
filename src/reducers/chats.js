@@ -1,92 +1,128 @@
 import { combineReducers } from 'redux'
-import * as types from '../constants/chats';
+import types from 'constants/chats'
+import auth from 'constants/auth'
 
 const initialState = {
-  activeId: null,
-  allIds: [],
-  myIds: [],
-  byIds: {}
-};
+  chat: null,
+  list: [],
+  myHash: {user_id: null},
+  hash: {}
+}
 
-const activeId = (state = initialState.activeId, action) => {
-  switch (action.type) {
-    case types.SET_ACTIVE_CHAT:
-      return getChatId(action.payload.chat);
-    case types.JOIN_CHAT_SUCCESS:
-      return getChatId(action.payload.chat);
-    case types.UNSET_ACTIVE_CHAT:
-      return null;
-    case types.DELETE_CHAT_SUCCESS:
-      return null;
-    default:
-      return state;
-  }
-};
+const Message = {
+  _message: (_message) => (_message.payload && _message.payload.message) || _message,
+  chatId: (_message) => Message._message(_message).chatId
+}
+const Chat = {
+  _chat:     (_chat)  => ( _chat.payload && _chat.payload.chat ) || _chat.payload || _chat,
+  _chats:    (_chats) => ( _chats.payload && _chats.payload.chats ) || _chats,
+  id:        (_chat)   => Chat._chat(_chat)._id,
+  isMember:  (_chat, user_id) => Chat._chat(_chat).members.some(member => member._id === user_id),
+  isCreator: (_chat, user_id) => Chat._chat(_chat).creator._id === user_id,
+  remove:    (hash, chat) => {
+    const newHash = { ...hash }
+    delete newHash[Chat.id(chat)]
+    return newHash
+  },
+  normalize: (_chats) => {
+    let hash = {}
+    Chat._chats(_chats).forEach( (chat) => hash[Chat.id(chat)] = chat )
+    return hash
+  },
+  filterMy: (_chats, user_id) => {
+    let hash = {user_id}
+    Chat._chats(_chats).forEach((chat) => 
+      hash[Chat.id(chat)] = Chat.isCreator(chat, user_id) || Chat.isMember(chat, user_id) )
+    return hash
+  },
+  updateWithMessage: (chat, _chat) => {
+    let chat2 = Chat._chat(_chat)
+    if ( chat._id !== chat2._id ) return chat
+    chat2 = {...chat2}
+    chat2.messages = (chat.messages || []).concat(Message._message(_chat))
+    // message count ?
+    return chat2
+  },
 
-const allIds = (state = initialState.allIds, action) => {
-  switch (action.type) {
-    case types.FETCH_ALL_CHATS_SUCCESS:
-      return action.payload.chats.map(getChatId);
-    case types.CREATE_CHAT_SUCCESS:
-      return [...state, getChatId(action.payload.chat)];
-    case types.DELETE_CHAT_SUCCESS:
-      return state.filter(
-        chatId => chatId !== getChatId(action.payload.chat)
-      );
-    default:
-      return state;
+  updateByChat: (out_state_hash, _chat) => {
+    const chat = Chat._chat(_chat)
+    out_state_hash[chat._id] = chat._id
+    return out_state_hash
+  },
+  updateMessage: (state_chat, _message) => {
+    if ( state_chat._id !== Message.chatId(_message) )
+      return state_chat
+    let ret_state = {...state_chat}
+    ret_state.messages = (ret_state.messages || []).concat(Message._message(_message))
+    ret_state.message += 1
+    return ret_state
   }
-};
+}
 
-const myIds = (state = initialState.myIds, action) => {
-  switch (action.type) {
-    case types.FETCH_MY_CHATS_SUCCESS:
-      return action.payload.chats.map(getChatId);
-    case types.CREATE_CHAT_SUCCESS:
-    case types.JOIN_CHAT_SUCCESS:
-      return [...state, getChatId(action.payload.chat)];
-    case types.LEAVE_CHAT_SUCCESS:
-    case types.DELETE_CHAT_SUCCESS:
-      return state.filter(
-        chatId => chatId !== getChatId(action.payload.chat)
-      );
-    default:
-      return state;
-  }
-};
 
-const byIds = (state = initialState.byIds, action) => {
+const chat = (state = initialState.chat, action) => {
   switch (action.type) {
-    case types.FETCH_ALL_CHATS_SUCCESS:
-    case types.FETCH_MY_CHATS_SUCCESS:
-      return {
-        ...state,
-        ...action.payload.chats.reduce((ids, chat) => ({
-          ...ids,
-          [getChatId(chat)]: chat,
-        }), {}),
-      }
-    case types.CREATE_CHAT_SUCCESS:
-      return {
-        ...state,
-        [getChatId(action.payload.chat)]: action.payload.chat,
-      };
-    case types.DELETE_CHAT_SUCCESS:
-      const newState = { ...state };
-      delete newState[getChatId(action.payload.chat)];
-      return newState;
-    default:
-      return state;
+    case types.notActive:         return null
+    case types.active.SUCCESS:    return Chat._chat(action)
+    case types.join.SUCCESS:
+    case types.leave.SUCCESS:     return Chat.updateWithMessage(state, action)
+    case types.remove.SUCCESS:    return state && state._id === Chat.id(action) ? null : chat
+    case types.send.SUCCESS:      return Chat.updateMessage(state, action)
+    default:                      return state
   }
-};
+}
+
+const list = (state = initialState.list, action) => {
+  switch (action.type) {
+    case types.all.SUCCESS:     return action.payload.chats.map(Chat.id)
+    case types.create.SUCCESS:  return [...state, Chat.id(action)]
+    case types.remove.SUCCESS:  return state.filter( id => id !== Chat.id(action) )
+    default:                    return state
+  }
+}
+
+const myHash = (state = initialState.myHash, action) => {
+  switch (action.type) {
+    // case types.my.SUCCESS:      return action.payload.chats.map(Chat.id)
+    // case types.auth.
+    case auth.signup.SUCCESS:
+    case auth.session.SUCCESS:
+    case auth.login.SUCCESS:   return {user_id: action.payload.user._id}
+
+    case types.create.SUCCESS:
+    case types.join.SUCCESS:    return {...state, [Chat.id(action)]: true}
+    case types.all.SUCCESS:     return Chat.filterMy(action, state.user_id)
+    case types.leave.SUCCESS:
+    case types.remove.SUCCESS:  return Chat.remove(state, action)
+    default:                    return state
+  }
+}
+
+const hash = (state = initialState.hash, action) => {
+  switch (action.type) {
+    case types.join.SUCCESS:
+    case types.leave.SUCCESS:   return Chat.updateByChat({...state}, action)
+    case types.all.SUCCESS:     return Chat.normalize(action)
+    case types.create.SUCCESS:  return { ...state, [Chat.id(action)]: action.payload.chat }
+    case types.remove.SUCCESS:  return Chat.remove(state, action)
+    default:                    return state
+  }
+}
+
 
 export default combineReducers({
-  activeId,
-  allIds,
-  myIds,
-  byIds,
+  chat,
+  list,
+  myHash,
+  hash
 })
 
-export const getChatId = (chat) => chat._id;
-export const getById = (state, id) => state.byIds[id];
-export const getByIds = (state, ids) => ids.map(id => getById(state, id));
+export const construct = (state) => ({
+  all:      () => state.chats.list.map(id => state.chats.hash[id]),
+  active:   () => state.chats.chat,
+  find:   (id) => state.chats.hash[id],
+  my:       () => state.chats.myHash
+})
+export const getById = (state, id) => state.hash[id]
+export const gethash = (state, ids) => ids.map(id => getById(state, id))
+

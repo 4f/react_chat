@@ -1,5 +1,4 @@
 import React from 'react'
-import { Redirect } from 'react-router-dom'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
@@ -9,18 +8,17 @@ import Tabs, { Tab } from 'material-ui/Tabs'
 import Login from './login'
 import Signup from './signup'
 
+
 class WelcomePage extends React.Component {
   state = { activeTab: 0 }
 
-  componentDidMount() { this.props.recieveAuth() }
+  // componentDidMount() { this.props.actions.auth.session() }
 
   handleTabChage = (event, value) => { this.setState({ activeTab: value }) }
 
   render() {
-    const { classes, signup, login, isAuth } = this.props
+    const { classes, actions: {auth: { signup, login } } } = this.props
     const { activeTab } = this.state
-
-    if (isAuth) return <Redirect to="/chat" />
 
     return (
       <React.Fragment>
@@ -57,3 +55,4 @@ class WelcomePage extends React.Component {
 }
 
 export default WelcomePage
+

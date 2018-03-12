@@ -1,43 +1,39 @@
-const names = ["SIGNUP", "LOGIN", "LOGOUT", "RECIEVE_AUTH"]
-const methods = ["REQUEST", "SUCCESS", "FAILURE"]
+import {generateRequestSymbols} from "utils/helper"
 
-/*names.reduce((r, i) => (
-  { ...r, [i]: methods.reduce((r2, i2) => ({ ...r2, [i2]: Symbol(`auth/${i}_${i2}`) }), {}) }
-), {} )*/
-
-let default_return = {}
-names.map( n => {
-  default_return[n] = {}
-  methods.map(m => default_return[n][m] = Symbol(`auth/${n}_${m}`) )
+const types =  generateRequestSymbols( 'AUTH', {
+  signup:       { method: "POST", path: "/signup" },
+  login:        { method: "POST", path: "/login" },
+  logout:       { method: "GET",  path: "/logout" },
+  session:      { method: "GET",  path: "/users/me" }
 } )
 
-export default default_return
+export default types
 
 /*
 {
-  SIGNUP:
+  signup:
     {
-      REQUEST: Symbol('auth/SIGNUP_REQUEST'),
-      SUCCESS: Symbol('auth/SIGNUP_SUCCESS'),
-      FAILURE: Symbol('auth/SIGNUP_FAILURE')
+      REQUEST: Symbol('AUTH/SIGNUP/REQUEST'),
+      SUCCESS: Symbol('AUTH/SIGNUP/SUCCESS'),
+      FAILURE: Symbol('AUTH/SIGNUP/FAILURE')
     },
-  LOGIN:
+  login:
     {
-      REQUEST: Symbol('auth/LOGIN_REQUEST'),
-      SUCCESS: Symbol('auth/LOGIN_SUCCESS'),
-      FAILURE: Symbol('auth/LOGIN_FAILURE')
+      REQUEST: Symbol('AUTH/LOGIN/REQUEST'),
+      SUCCESS: Symbol('AUTH/LOGIN/SUCCESS'),
+      FAILURE: Symbol('AUTH/LOGIN/FAILURE')
     },
-  LOGOUT:
+  logout:
     {
-      REQUEST: Symbol('auth/LOGOUT_REQUEST'),
-      SUCCESS: Symbol('auth/LOGOUT_SUCCESS'),
-      FAILURE: Symbol('auth/LOGOUT_FAILURE')
+      REQUEST: Symbol('AUTH/LOGOUT/REQUEST'),
+      SUCCESS: Symbol('AUTH/LOGOUT/SUCCESS'),
+      FAILURE: Symbol('AUTH/LOGOUT/FAILURE')
     },
-  RECIEVE_AUTH:
+  session:
     {
-      REQUEST: Symbol('auth/RECIEVE_AUTH_REQUEST'),
-      SUCCESS: Symbol('auth/RECIEVE_AUTH_SUCCESS'),
-      FAILURE: Symbol('auth/RECIEVE_AUTH_FAILURE')
+      REQUEST: Symbol('AUTH/SESSION/REQUEST'),
+      SUCCESS: Symbol('AUTH/SESSION/SUCCESS'),
+      FAILURE: Symbol('AUTH/SESSION/FAILURE')
     }
 }
 */

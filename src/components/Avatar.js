@@ -7,9 +7,9 @@ import { withStyles } from 'material-ui/styles'
 import styles from 'styles/Avatar'
 
 
-const Avatar = ({ colorFrom, classes, children, ...rest }) => (
+const Avatar = ({ colorFrom, classes, label, ...rest }) => (
   <MUIAvatar className={classes.avatar} style={{ backgroundColor: getColor(colorFrom) }} {...rest}>
-    {titleInitials(children)}
+    {titleInitials(label)}
   </MUIAvatar>
 )
 

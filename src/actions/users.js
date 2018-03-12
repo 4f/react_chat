@@ -1,24 +1,18 @@
-import * as types from '../constants/users';
-import callApi from '../utils/call-api';
+import  types from 'constants/users'
+import {http} from 'utils/call-api'
 
-export function editUser({ username, firstName, lastName }) {
-  return (dispatch, getState) => {
-    const { token } = getState().auth;
+const log = function (error) { console.info(error) }
+const thens = {}
 
-    dispatch({
-      type: types.EDIT_USER_REQUEST
-    })
 
-    return callApi('/users/me', token, { method: 'POST' }, {
-      data: { username, firstName, lastName }
-    })
-      .then(json => dispatch({
-        type: types.EDIT_USER_SUCCESS,
-        data: json,
-      }))
-      .catch(reason => dispatch({
-        type: types.EDIT_USER_FAILURE,
-        data: reason,
-      }));
-  };
+const register = (symbol) => (payload) => (dispatch, getState) => {
+  const options = types[symbol]
+  dispatch({ type: options.REQUEST })
+  return http({ type: options, dispatch, getState, payload })
+    .then(thens[symbol])
+    .catch(log)
 }
+
+const edit = register("edit")
+
+export default { edit }

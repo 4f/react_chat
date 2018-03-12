@@ -18,7 +18,7 @@ export default function colorFrom(string) {
 
     return colors[names[colorIndex]][bolds[boldIndex]]
   } catch (e) {
-    console.error(e)
+    console.info('error in colorFrom', e)
     return colors["blueGrey"][500]
   }
 }

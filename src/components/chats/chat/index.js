@@ -4,12 +4,17 @@ import { withStyles } from 'material-ui/styles'
 import Messages from './messages'
 import InputMessage from './input'
 
-import styles from 'styles/Chat'
+import {Chat as styles} from 'styles/chats/chat'
 
-const Chat = ({ classes, messages }) => (
+const Chat = ({ chat, classes, join, send, user }) => (
   <main className={classes.chatLayout}>
-    <Messages messages={messages} />
-    <InputMessage />
+    <Messages chat={chat} user={user} />
+    <InputMessage
+      onSend={(content) => send({_id: chat._id, content: content })}
+      on={Boolean(chat)}
+      isJoinButton={!user.isInChat}
+      onJoin={() => join({_id: chat._id})}
+    />
   </main>
 )
 
