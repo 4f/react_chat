@@ -1,4 +1,11 @@
-export const Sidebar = theme => ({
+export default theme => ({
+  moreIcon: {
+    "&:hover": {
+      background: theme.palette.grey[100],
+      color: "#11f",
+      border: "1px outset white"
+    }
+  },
   drawerPaper: {
     position: 'relative',
     height: '100%',
@@ -6,6 +13,7 @@ export const Sidebar = theme => ({
   },
   drawerHeader: {
     ...theme.mixins.toolbar,
+    paddingTop:  theme.spacing.unit * 2,
     paddingLeft: theme.spacing.unit * 3,
     paddingRight: theme.spacing.unit * 3
   },
@@ -14,26 +22,17 @@ export const Sidebar = theme => ({
       background: "lightgrey",
       color: "black"
     }
-  }
-})
-
-export const Item = theme => ({
+  },
   activeItem: {
     backgroundColor: theme.palette.grey[200]
-  }
-})
-
-export const List = theme => ({
+  },
   chatsList: {
     height: 'calc(100% - 56px)',
     overflowY: 'scroll'
   },
   noChats: {
     textAlign: 'center'
-  }
-})
-
-export const New = theme => ({
+  },
   newChatButton: {
     position: 'absolute',
     left: 'auto',

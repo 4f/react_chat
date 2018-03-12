@@ -1,13 +1,10 @@
 import React from 'react';
-import { withStyles } from 'material-ui/styles';
 import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
 import Modal from 'material-ui/Modal';
 import Typography from 'material-ui/Typography';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
-
-import {New as styles} from 'styles/chats/sidebar'
 
 class NewChatButton extends React.Component {
   state = { open: false, title: '' }
@@ -64,4 +61,4 @@ class NewChatButton extends React.Component {
   }
 }
 
-export default withStyles(styles)(NewChatButton);
+export default NewChatButton

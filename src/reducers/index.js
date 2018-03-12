@@ -9,7 +9,7 @@ export default combineReducers({
 
 
 export function construct(state){
-  const activeChat = () => state.chats.hash[state.chats.activeId]
+  const activeChat = () => state.chats.chat
 
   const isCreator = () => {
     try {

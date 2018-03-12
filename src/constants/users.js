@@ -1,7 +1,7 @@
 import { generateRequestSymbols } from "utils/helper"
 
 const types = generateRequestSymbols('USERS', {
-  edit: { method: "PUT", path: "/user" }
+  edit: { method: "POST", path: "/users/me" }
 })
 
 export default types

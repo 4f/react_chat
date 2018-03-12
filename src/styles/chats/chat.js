@@ -35,7 +35,11 @@ export const Message = theme => ({
     }
   },
   messageWrappperFromMe: {
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    "& $message": {
+      marginRight: theme.spacing.unit * 2,
+      backgroundColor: '#e6dcff'
+    },
   },
   message: {
     maxWidth: '70%',
@@ -47,15 +51,14 @@ export const Message = theme => ({
       background: "#f1f1f1"
     }
   },
-  messageFromMe: {
-    marginRight: theme.spacing.unit * 2,
-    backgroundColor: '#e6dcff'
-  },
   statusMessage: {
+    background: "#f3f3f3",
+    margin: "0 30%",
     width: '100%',
     textAlign: 'center'
   },
   statusMessageUser: {
+    fontWeight: "700",
     display: 'inline'
   }
 })

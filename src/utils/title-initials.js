@@ -6,7 +6,7 @@ export default function titleInitials(title) {
       .join('')
       .toUpperCase()
   } catch (e) {
-    console.error(e)
+    console.info('error titleInitials', e)
     return 'ER'
   }
 }

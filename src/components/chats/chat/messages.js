@@ -16,18 +16,17 @@ class ChatMessageList extends React.Component {
   }
 
   render() {
-    const { classes, messages, match, user } = this.props
-    
-    if (!match.params.id)
+    const { classes, chat, user } = this.props
+    if (!chat)
       return <NoChat classes={classes} />
-
-    if (messages && messages.length)
-      return (
-        <div className={classes.messagesWrapper} ref="messagesWrapper">
-          <List messages={messages} user={user} />
-        </div>
-      )
-    return <Empty />
+      else
+        if( chat.messages && chat.messages.length )
+          return (
+            <div className={classes.messagesWrapper} ref="messagesWrapper">
+              <List messages={chat.messages} user={user} />
+            </div> )
+        else
+          return <Empty />
   }
 }
 

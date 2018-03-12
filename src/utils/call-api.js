@@ -2,14 +2,22 @@ import fetch from 'isomorphic-fetch'
 
 const BASE_URL = "http://localhost:8000/v1"
 
-const preparePath = (path, opt) => path.replace(/:[^\/]*/g, str => opt[str.slice(1)])
+const preparePath = (path, out_opt) => path.replace(/:[^/]*/g, str => {
+  const key = str.slice(1)//without :
+  const ret = out_opt[key]
+  delete out_opt[key]
+  return ret
+} )
 
   // path.split(/(?:(?:^|\/)[^:]*)?\/:/)
 
 export function http({ dispatch, getState, payload, type, type: {method, path} }){
-  path = preparePath(path, payload)
-  console.log('path', path)
-  if(payload && !payload.username) payload = {data: payload }//login/signup have dif struct
+  if (payload && !payload.password) {
+    let copy_payload = {...payload}
+    path = preparePath(path, copy_payload)
+    payload = {data: copy_payload }//login/signup have dif struct
+    console.log('path', path)
+  }
   
   dispatch({type: type.REQUEST })
   const token = getState && getState().auth.token

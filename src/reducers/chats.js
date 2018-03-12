@@ -1,19 +1,25 @@
 import { combineReducers } from 'redux'
 import types from 'constants/chats'
+import auth from 'constants/auth'
 
 const initialState = {
-  activeId: null,
+  chat: null,
   list: [],
-  myList: [],
-  hash: {},
-  messages: []
+  myHash: {user_id: null},
+  hash: {}
 }
 
+const Message = {
+  _message: (_message) => (_message.payload && _message.payload.message) || _message,
+  chatId: (_message) => Message._message(_message).chatId
+}
 const Chat = {
-  _chat:  (_chat)  => ( _chat.payload && _chat.payload.chat ) || _chat,
-  _chats: (_chats) => ( _chats.payload && _chats.payload.chats ) || _chats,
-  id:     (chat)   => Chat._chat(chat)._id,
-  remove: (hash, chat) => {
+  _chat:     (_chat)  => ( _chat.payload && _chat.payload.chat ) || _chat.payload || _chat,
+  _chats:    (_chats) => ( _chats.payload && _chats.payload.chats ) || _chats,
+  id:        (_chat)   => Chat._chat(_chat)._id,
+  isMember:  (_chat, user_id) => Chat._chat(_chat).members.some(member => member._id === user_id),
+  isCreator: (_chat, user_id) => Chat._chat(_chat).creator._id === user_id,
+  remove:    (hash, chat) => {
     const newHash = { ...hash }
     delete newHash[Chat.id(chat)]
     return newHash
@@ -23,20 +29,45 @@ const Chat = {
     Chat._chats(_chats).forEach( (chat) => hash[Chat.id(chat)] = chat )
     return hash
   },
-  updateMembers: (state_hash, _chat) => {
-    let chat = Chat._chat(_chat)
-    state_hash[chat._id].members = chat.members
-    return state_hash
-  }
+  filterMy: (_chats, user_id) => {
+    let hash = {user_id}
+    Chat._chats(_chats).forEach((chat) => 
+      hash[Chat.id(chat)] = Chat.isCreator(chat, user_id) || Chat.isMember(chat, user_id) )
+    return hash
+  },
+  updateWithMessage: (chat, _chat) => {
+    let chat2 = Chat._chat(_chat)
+    if ( chat._id !== chat2._id ) return chat
+    chat2 = {...chat2}
+    chat2.messages = (chat.messages || []).concat(Message._message(_chat))
+    // message count ?
+    return chat2
+  },
 
+  updateByChat: (out_state_hash, _chat) => {
+    const chat = Chat._chat(_chat)
+    out_state_hash[chat._id] = chat._id
+    return out_state_hash
+  },
+  updateMessage: (state_chat, _message) => {
+    if ( state_chat._id !== Message.chatId(_message) )
+      return state_chat
+    let ret_state = {...state_chat}
+    ret_state.messages = (ret_state.messages || []).concat(Message._message(_message))
+    ret_state.message += 1
+    return ret_state
+  }
 }
 
 
-const activeId = (state = initialState.activeId, action) => {
+const chat = (state = initialState.chat, action) => {
   switch (action.type) {
-    case types.active:            return Chat.id(action) || null
-    // case types.join.SUCCESS:      return Chat.id(action)
-    case types.remove.SUCCESS:    return null
+    case types.notActive:         return null
+    case types.active.SUCCESS:    return Chat._chat(action)
+    case types.join.SUCCESS:
+    case types.leave.SUCCESS:     return Chat.updateWithMessage(state, action)
+    case types.remove.SUCCESS:    return state && state._id === Chat.id(action) ? null : chat
+    case types.send.SUCCESS:      return Chat.updateMessage(state, action)
     default:                      return state
   }
 }
@@ -50,22 +81,27 @@ const list = (state = initialState.list, action) => {
   }
 }
 
-const myList = (state = initialState.myList, action) => {
+const myHash = (state = initialState.myHash, action) => {
   switch (action.type) {
-    case types.my.SUCCESS:      return action.payload.chats.map(Chat.id)
+    // case types.my.SUCCESS:      return action.payload.chats.map(Chat.id)
+    // case types.auth.
+    case auth.signup.SUCCESS:
+    case auth.session.SUCCESS:
+    case auth.login.SUCCESS:   return {user_id: action.payload.user._id}
+
     case types.create.SUCCESS:
-    case types.join.SUCCESS:    return [...state, Chat.id(action)]
+    case types.join.SUCCESS:    return {...state, [Chat.id(action)]: true}
+    case types.all.SUCCESS:     return Chat.filterMy(action, state.user_id)
     case types.leave.SUCCESS:
-    case types.remove.SUCCESS:  return state.filter( id => id !== Chat.id(action) )
+    case types.remove.SUCCESS:  return Chat.remove(state, action)
     default:                    return state
   }
 }
 
 const hash = (state = initialState.hash, action) => {
   switch (action.type) {
-    // case types.my.SUCCESS:
     case types.join.SUCCESS:
-    case types.leave.SUCCESS:   return Chat.updateMembers({...state}, action)
+    case types.leave.SUCCESS:   return Chat.updateByChat({...state}, action)
     case types.all.SUCCESS:     return Chat.normalize(action)
     case types.create.SUCCESS:  return { ...state, [Chat.id(action)]: action.payload.chat }
     case types.remove.SUCCESS:  return Chat.remove(state, action)
@@ -73,29 +109,19 @@ const hash = (state = initialState.hash, action) => {
   }
 }
 
-const messages = (state = initialState.messages, action) => {
-  switch (action.type) {
-    case types.join.SUCCESS:
-    case types.leave.SUCCESS:
-    case types.send.SUCCESS:    return [...state, action.payload.message]
-    case types.item.SUCCESS:    return action.payload.chat.messages
-    default:                    return state
-  }
-}
-
 
 export default combineReducers({
-  activeId,
+  chat,
   list,
-  myList,
-  hash,
-  messages
+  myHash,
+  hash
 })
 
 export const construct = (state) => ({
-  all:    () => state.chats.list.map(id => state.chats.hash[id]),
-  active: () => state.chats.hash[state.chats.activeId],
-  find:   (id) => state.chats.hash[id]
+  all:      () => state.chats.list.map(id => state.chats.hash[id]),
+  active:   () => state.chats.chat,
+  find:   (id) => state.chats.hash[id],
+  my:       () => state.chats.myHash
 })
 export const getById = (state, id) => state.hash[id]
 export const gethash = (state, ids) => ids.map(id => getById(state, id))

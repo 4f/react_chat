@@ -6,14 +6,14 @@ import InputMessage from './input'
 
 import {Chat as styles} from 'styles/chats/chat'
 
-const Chat = ({ chat, classes, messages, join, send, user }) => (
+const Chat = ({ chat, classes, join, send, user }) => (
   <main className={classes.chatLayout}>
-    <Messages messages={messages} user={user} />
+    <Messages chat={chat} user={user} />
     <InputMessage
-      onSend={(content) => send({id: chat._id, content: content })}
+      onSend={(content) => send({_id: chat._id, content: content })}
       on={Boolean(chat)}
       isJoinButton={!user.isInChat}
-      onJoin={() => join({id: chat._id})}
+      onJoin={() => join({_id: chat._id})}
     />
   </main>
 )

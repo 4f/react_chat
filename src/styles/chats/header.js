@@ -1,18 +1,31 @@
-export const Header = theme => ({
+export default theme => ({
   appBar: {
     position: 'fixed',
     width: `calc(100% - 320px)`,
     marginLeft: 320
   },
-  appBarTitle: {
+  appBarTitleLeft: {
     flex: 1,
-    marginLeft: theme.spacing.unit * 2,
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    marginLeft: 0,
     marginRight: theme.spacing.unit * 2,
     color: theme.palette.secondary.contrastText
-  }
-})
-
-export const UserMenu = theme => ({
+  },
+  menuItem: {
+    "&:hover $icon": {
+      color: "blue"
+    }
+  },
+  icon: {
+    color: "lightblue"
+  },
+  appBarTitleRight: {
+    marginLeft: theme.spacing.unit * 2,
+    marginRight: 0,
+    color: theme.palette.secondary.contrastText
+  },
   modalWrapper: {
     display: 'flex',
     justifyContent: 'center',
@@ -23,17 +36,7 @@ export const UserMenu = theme => ({
     minWidth: '300px',
     padding: theme.spacing.unit * 3
   },
-  menuItem: {
-    "&:hover $icon": {
-      color: "blue"
-    }
-  },
-  icon: {
-    color: "lightblue"
-  },
-  appBarTitle: {
-    marginLeft: theme.spacing.unit * 2,
-    marginRight: theme.spacing.unit * 2,
-    color: theme.palette.secondary.contrastText
+  menuButton: {
+    minWidth: "0px"
   }
 })

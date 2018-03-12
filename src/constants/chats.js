@@ -1,16 +1,16 @@
 import { generateRequestSymbols } from "utils/helper"
 
 const types = {
-  active: Symbol('CHATS/ACTIVE'),
+  notActive: Symbol('CHATS/NOT_ACTIVE'),
   ...generateRequestSymbols('CHATS', {
     all:    { method: "GET",    path: "/chats" },
     my:     { method: "POST",   path: "/chats/my" },
-    item:   { method: "GET",    path: "/chats/:id" },
+    active: { method: "GET",    path: "/chats/:_id" },
     create: { method: "POST",   path: "/chats" },
-    join:   { method: "GET",    path: "/chats/:id/join" },
-    leave:  { method: "GET",    path: "/chats/:id/leave" },
-    remove: { method: "DELETE", path: "/chats/:id" },
-    send:   { method: "POST",    path: "/chats/:id" },
+    join:   { method: "GET",    path: "/chats/:_id/join" },
+    leave:  { method: "GET",    path: "/chats/:_id/leave" },
+    remove: { method: "DELETE", path: "/chats/:_id" },
+    send:   { method: "POST",   path: "/chats/:_id" },
   })
 }
 
