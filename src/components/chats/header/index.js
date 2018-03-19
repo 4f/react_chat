@@ -24,7 +24,7 @@ class ChatHeader extends React.Component {
     return (
       <AppBar className={classes.appBar} color="primary">
         <Toolbar color="contrast">
-          { chat && <Avatar colorFrom={chat._id} label={chat.title} /> }
+          { !!chat && <Avatar colorFrom={chat._id} label={chat.title} /> }
           <Typography variant="title" align="left" className={classes.appBarTitleLeft}>
 
             { !chat &&  "DogeCodes React Chat#1" }
@@ -50,7 +50,7 @@ class ChatHeader extends React.Component {
             />
           </Typography>
 
-          <Avatar  colorFrom={user._id} label={user.username} />
+          <Avatar colorFrom={user.username} label={user.username} />
 
           <Modal classes={classes}
             on={this.state.isModal}

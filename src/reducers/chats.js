@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import types from 'constants/chats'
+import sockets from 'constants/sockets'
 import auth from 'constants/auth'
 
 const initialState = {
@@ -46,8 +47,15 @@ const Chat = {
 
   updateByChat: (out_state_hash, _chat) => {
     const chat = Chat._chat(_chat)
-    out_state_hash[chat._id] = chat._id
+    out_state_hash[chat._id] = chat
     return out_state_hash
+  },
+  updateMembers: (state_chat, _chat) => {
+    const chat = Chat._chat(_chat)
+    if (state_chat._id !== chat._id) return state_chat;
+    let out_state = { ...state_chat }
+    out_state.members = chat.members
+    return out_state
   },
   updateMessage: (state_chat, _message) => {
     if ( state_chat._id !== Message.chatId(_message) )
@@ -62,21 +70,25 @@ const Chat = {
 
 const chat = (state = initialState.chat, action) => {
   switch (action.type) {
-    case types.notActive:         return null
-    case types.active.SUCCESS:    return Chat._chat(action)
+    case types.active:          return action.payload._id ? state : 0
+    case types.get.SUCCESS:     return Chat._chat(action)
     case types.join.SUCCESS:
-    case types.leave.SUCCESS:     return Chat.updateWithMessage(state, action)
-    case types.remove.SUCCESS:    return state && state._id === Chat.id(action) ? null : chat
-    case types.send.SUCCESS:      return Chat.updateMessage(state, action)
-    default:                      return state
+    case types.leave.SUCCESS:   return Chat.updateMembers(state, action)
+    case sockets.DELETE_CHAT:   return state && state._id === Chat.id(action) ? 0 : chat
+    // case types.remove.SUCCESS:  return state && state._id === Chat.id(action) ? null : chat
+    case sockets.GET_MESSAGE:   return Chat.updateMessage(state, action)
+    // case types.send.SUCCESS:    
+    default:                    return state
   }
 }
 
 const list = (state = initialState.list, action) => {
   switch (action.type) {
     case types.all.SUCCESS:     return action.payload.chats.map(Chat.id)
-    case types.create.SUCCESS:  return [...state, Chat.id(action)]
-    case types.remove.SUCCESS:  return state.filter( id => id !== Chat.id(action) )
+    case sockets.NEW_CHAT:      return [...state, Chat.id(action)]
+    // case types.create.SUCCESS:  return [...state, Chat.id(action)]
+    case sockets.DELETE_CHAT:   return state.filter( id => id !== Chat.id(action) )
+    // case types.remove.SUCCESS:  return state.filter( id => id !== Chat.id(action) )
     default:                    return state
   }
 }
@@ -87,13 +99,14 @@ const myHash = (state = initialState.myHash, action) => {
     // case types.auth.
     case auth.signup.SUCCESS:
     case auth.session.SUCCESS:
-    case auth.login.SUCCESS:   return {user_id: action.payload.user._id}
+    case auth.login.SUCCESS:    return {user_id: action.payload.user._id}
 
     case types.create.SUCCESS:
     case types.join.SUCCESS:    return {...state, [Chat.id(action)]: true}
     case types.all.SUCCESS:     return Chat.filterMy(action, state.user_id)
     case types.leave.SUCCESS:
-    case types.remove.SUCCESS:  return Chat.remove(state, action)
+    case sockets.DELETE_CHAT:   return Chat.remove(state, action)
+    // case types.remove.SUCCESS:  return Chat.remove(state, action)
     default:                    return state
   }
 }
@@ -103,8 +116,10 @@ const hash = (state = initialState.hash, action) => {
     case types.join.SUCCESS:
     case types.leave.SUCCESS:   return Chat.updateByChat({...state}, action)
     case types.all.SUCCESS:     return Chat.normalize(action)
-    case types.create.SUCCESS:  return { ...state, [Chat.id(action)]: action.payload.chat }
-    case types.remove.SUCCESS:  return Chat.remove(state, action)
+    case sockets.NEW_CHAT:      return { ...state, [Chat.id(action)]: action.payload.chat }
+    // case types.create.SUCCESS:  return { ...state, [Chat.id(action)]: action.payload.chat }
+    case sockets.DELETE_CHAT:   return Chat.remove(state, action)
+    // case types.remove.SUCCESS:  return Chat.remove(state, action)
     default:                    return state
   }
 }

@@ -4,9 +4,8 @@ import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button'
 import TextField from 'material-ui/TextField'
-
+import Toolbar from 'material-ui/Toolbar'
 import Avatar from 'components/Avatar'
-
 
 class EditModal extends React.Component {
   state = { username: '', firstName: '', lastName: '' }
@@ -32,7 +31,12 @@ class EditModal extends React.Component {
     return (
       <Modal open={this.props.on} className={this.props.classes.modalWrapper} onClose={this.props.toggle}>
         <Paper className={this.props.classes.modal}>
-          <Typography variant="title" id="modal-title"> Edit profile </Typography>
+          <Toolbar className={this.props.classes.modalToolbar}>
+            <Avatar colorFrom={this.state.username} label={this.state.username} />
+            <Typography variant="title" align="right"
+              className={this.props.classes.modalTitle}
+            > Edit profile </Typography>
+          </Toolbar>
           <TextField name="username" type="text" margin="normal" fullWidth
             label="Username"
             value={this.state.username}

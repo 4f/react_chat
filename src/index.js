@@ -16,15 +16,13 @@ const render = () => ReactDOM.render( <App />, document.getElementById('root') )
 const App = withStyles(styles)( ({ classes }) => (
   <Provider store={store}>
     <div className={classes.root}>
-      <RoutesContainer />
+      <RoutesContainer classes={classes} />
     </div>
   </Provider>
 ) )
 
 render()
 
-if (module.hot) {
-  module.hot.accept('./components/app', () => render() )
-}
+if (module.hot) module.hot.accept(App, () => render() );
 
 registerServiceWorker()

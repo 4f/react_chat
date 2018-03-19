@@ -1,9 +1,9 @@
 export default function titleInitials(title) {
+  if ( !title ) return "ES";
   try {
     return title
-      .match(/\b(\w)\w*\W*\b(\w)?/)
-      .slice(1, 3)
-      .join('')
+      .match(/(^|\s)[^\s]/g)
+      .slice(0, 2).join('').replace(/\s/g, "")
       .toUpperCase()
   } catch (e) {
     console.info('error titleInitials', e)

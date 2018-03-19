@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from 'material-ui/Button'
-import Menu, { MenuItem, MenuList } from 'material-ui/Menu'
+import Menu, { MenuItem } from 'material-ui/Menu'
 // import AccountCircle from 'material-ui-icons/AccountCircle'
 import MoreIcon from 'material-ui-icons/MoreVert'
 
@@ -8,8 +8,6 @@ import { ListItemIcon, ListItemText } from 'material-ui/List'
 
 import InboxIcon from 'material-ui-icons/ExitToApp'
 import DraftsIcon from 'material-ui-icons/Edit'
-
-import Avatar from 'components/Avatar'
 
 
 class UserMenu extends React.Component {
@@ -50,7 +48,6 @@ class UserMenu extends React.Component {
 
     return (
       <React.Fragment>
-
         {user.username}
 
         <Button size="small" color="inherit" aria-haspopup="true"

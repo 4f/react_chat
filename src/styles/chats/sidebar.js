@@ -1,9 +1,29 @@
 export default theme => ({
+  item: {
+    padding: "6px 4px 6px 12px",
+    "&:hover": {
+      // background: "red"
+    },
+    "&:hover $moreIcon": {
+      visibility: "visible",
+    }
+  },
+  activeItem: {
+    padding: "6px 4px 6px 12px",
+    backgroundColor: theme.palette.grey[200],
+    "&:hover $moreIcon": {
+      visibility: "visible",
+    }
+  },
+  itemRoot: {
+    paddingLeft: "0px"
+  },
   moreIcon: {
+    visibility: "hidden",
     "&:hover": {
       background: theme.palette.grey[100],
-      color: "#11f",
-      border: "1px outset white"
+      // color: "#11f",
+      // border: "1px outset white"
     }
   },
   drawerPaper: {
@@ -23,8 +43,24 @@ export default theme => ({
       color: "black"
     }
   },
-  activeItem: {
-    backgroundColor: theme.palette.grey[200]
+  itemText: {
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap"
+  },
+  itemText2: {
+    display: "flex",
+    justifyContent: "space-between",
+    opacity: ".4"
+  },
+  enemy: {
+    color: "red"
+  },
+  member: {
+    color: "blue"
+  },
+  creator: {
+    color: "green"
   },
   chatsList: {
     height: 'calc(100% - 56px)',

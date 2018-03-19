@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch'
+import {server} from 'constants/services'
 
 const BASE_URL = "http://localhost:8000/v1"
 
@@ -11,25 +12,32 @@ const preparePath = (path, out_opt) => path.replace(/:[^/]*/g, str => {
 
   // path.split(/(?:(?:^|\/)[^:]*)?\/:/)
 
-export function http({ dispatch, getState, payload, type, type: {method, path} }){
+export function http({ dispatch, getState, payload, options: {SUCCESS, REQUEST, FAILURE, method, path} }){
   if (payload && !payload.password) {
     let copy_payload = {...payload}
     path = preparePath(path, copy_payload)
     payload = {data: copy_payload }//login/signup have dif struct
-    console.log('path', path)
   }
-  
-  dispatch({type: type.REQUEST })
-  const token = getState && getState().auth.token
+  const { auth: {token}, services: {serverStatus} } = getState()
+  if (serverStatus[REQUEST]) {
+    const error = `wait the response ${REQUEST.toString()}`
+    console.info(error)
+    return Promise.resolve({ error })
+  }
+  dispatch({ type: REQUEST, payload })
+  dispatch({ type: server.REQUEST, payload: {type: REQUEST} })
 
   return callApi(path, token, { method }, payload)
     .then(json => {
-      dispatch({ type: type.SUCCESS, payload: json })
+      dispatch({ type: SUCCESS, payload: json, success: true })
+      dispatch({ type: server.SUCCESS, payload: { type: REQUEST } })
       return json
     })
-    .catch(reason => {
-      dispatch({ type: type.FAILURE, payload: reason })
-      throw reason
+    .catch(error => {
+      dispatch({ type: FAILURE, payload: error, error: true })
+      dispatch({ type: server.FAILURE, payload: { type: REQUEST } })
+      console.info(error)
+      return {error}
     } )
 }
 

@@ -38,5 +38,11 @@ export default theme => ({
   },
   menuButton: {
     minWidth: "0px"
+  },
+  modalToolbar: {
+    justifyContent: 'center'
+  },
+  modalTitle: {
+    flex: 1
   }
 })

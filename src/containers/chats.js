@@ -22,8 +22,8 @@ const mapState = state => {
     chats:      Chat.all(),
     chat:       Chat.active(),
     myHash:     Chat.my(),
-  //     my: fromChats.getByIds(state.chats, state.chats.myIds),
-    user:       GlobalMethods(state).getCurrentUser()
+    user:       GlobalMethods(state).getCurrentUser(),
+    isSocket:   state.services.isSocket
   }
 }
 
@@ -33,6 +33,7 @@ const mapDispatch = dispatch => ( {
     userEdit: bindActionCreators(Actions.users.edit,        dispatch),
     Chat:     bindActionCreators(Actions.chats,             dispatch),
     redirect: bindActionCreators(Actions.services.redirect, dispatch),
+    Socket:   bindActionCreators(Actions.sockets,           dispatch)
   }
 } )
 

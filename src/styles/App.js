@@ -5,5 +5,11 @@ export default theme => ({
     width: '100%',
     height: '100%',
     backgroundColor: theme.palette.background.default,
+  },
+  errors: {
+    background: 'red'
+  },
+  success: {
+    background: 'green'
   }
 })

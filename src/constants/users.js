@@ -1,4 +1,4 @@
-import { generateRequestSymbols } from "utils/helper"
+import { generateRequestSymbols } from "utils/helpers"
 
 const types = generateRequestSymbols('USERS', {
   edit: { method: "POST", path: "/users/me" }
