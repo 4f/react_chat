@@ -3,7 +3,7 @@ import {server} from 'constants/services'
 import sockets from 'constants/sockets'
 
 const message = ({ payload: {message} }) => (
-  {message: message && message.content || message}
+  { message: ( message && message.content) || message }
 )
 
 const intialState = {

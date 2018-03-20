@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { ListItem, ListItemText } from 'material-ui/List'
 import Tooltip from 'material-ui/Tooltip'
 import MoreIcon from 'material-ui-icons/MoreVert'
-import Typography from 'material-ui/Typography'
 
 
 import Avatar from 'components/Avatar'

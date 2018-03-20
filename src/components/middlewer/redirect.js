@@ -3,15 +3,17 @@ import { Redirect } from 'react-router-dom'
 
 import { redirects } from 'constants/config'
 
-
-const RedirectMiddlewer = ({ middlewer: { isAuth, name, Component }, ...props }) => (
-  <React.Fragment>
-    { isAuth === redirects[name].isAuth ?
-      <Redirect to={redirects[name].path} />
+class RedirectMiddlewer extends React.Component {
+  shouldComponentUpdate() { return this.props.isAuth !== 0 }
+  render() { 
+    const { middlewer: { isAuth, name, Component }, ...props } = this.props
+    return (
+      isAuth === redirects[name].isAuth ?
+    <Redirect to={redirects[name].path} />
       :
-      <Component {...props} />
-    }
-  </React.Fragment>
-)
+    <Component {...props} />
+    )
+  }
+}
 
 export default RedirectMiddlewer

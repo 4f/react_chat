@@ -10,21 +10,12 @@ export const Welcome = theme => ({
     '&:hover': {
       background: 'yellow'
     }
-  }
-})
-
-export const Login = theme => ({
+  },
   signUpButton: {
     marginTop: theme.spacing.unit * 2
   },
   hide: {
     display: 'none'
-  }
-})
-
-export const Signup = theme => ({
-  signUpButton: {
-    marginTop: theme.spacing.unit * 2
   }
 })
 
