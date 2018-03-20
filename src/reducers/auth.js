@@ -13,6 +13,10 @@ export default function auth(state = initialState, action) {
                                     token: action.payload.token }
     case types.session.SUCCESS:   return { ...state,
                                     isAuth: true, user: action.payload.user }
+    case types.signup.REQUEST:
+    case types.login.REQUEST:
+    case types.logout.REQUEST:
+    case types.session.REQUEST:   return { ...state, isAuth: 0 }
     case types.signup.FAILURE:
     case types.login.FAILURE:
     case types.session.FAILURE:

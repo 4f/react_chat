@@ -1,5 +1,4 @@
 import React from 'react'
-import IconButton from 'material-ui/IconButton'
 import Button from 'material-ui/Button'
 import Menu, { MenuItem } from 'material-ui/Menu'
 import MoreIcon from 'material-ui-icons/MoreVert'

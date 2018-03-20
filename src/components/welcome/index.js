@@ -5,19 +5,52 @@ import Typography from 'material-ui/Typography'
 import Grid from 'material-ui/Grid'
 import Paper from 'material-ui/Paper'
 import Tabs, { Tab } from 'material-ui/Tabs'
-import Login from './login'
-import Signup from './signup'
+import Form from './form'
 
 
 class WelcomePage extends React.Component {
-  state = { activeTab: 0 }
+  state = {
+    activeTab: "login",
+    submitted:  false,
+    user:     { username:  '', password:  '', password2: '' }
+  }
+  constructor(){
+    super()
+    this.handles = {
+      check:      this.checkError.bind(this),
+      change:     this.onFieldChange.bind(this),
+      submit:     this.onSubmit.bind(this),
+      setInput:   this.registerInput.bind(this),
+      trySubmit:  this.trySubmit.bind(this),
+      reset:      this.resetSubmit.bind(this)
+    }
+  }
 
-  // componentDidMount() { this.props.actions.auth.session() }
+  onTabChange        = (event, value) => { this.setState({ activeTab: value, submitted: false }) }
+  registerInput      = (el) => this.inputForValidation = el
+  trySubmit          = () => this.setState({ submitted: true })
+  checkError         = (name) => this.state.submitted && (
+    name === 'password2' ? this.state.user.password !== this.state.user.password2 :  !this.state.user[name] )
+  setRepitValidation = () => this.inputForValidation && this.inputForValidation.setCustomValidity     (
+    this.state.user.password === this.state.user.password2 ? "" : "repeated password not same" )
+  resetSubmit        = () => this.setState({ 
+    submitted: false,
+    user: { username: "", password: "", password2: "" } })
+  
+  onFieldChange = (event) => {
+    event.persist()
+    const { name, value } = event.target
+    this.setState({ user: { ...this.state.user, [name]: value } }, this.setRepitValidation)
+  }
 
-  handleTabChage = (event, value) => { this.setState({ activeTab: value }) }
+  onSubmit = (event) => {
+    this.trySubmit()
+    event.preventDefault()
+    this.props.actions.auth[this.state.activeTab](this.state.user)
+  }
 
   render() {
-    const { classes, actions: {auth: { signup, login } } } = this.props
+    const { classes } = this.props
     const { activeTab } = this.state
 
     return (
@@ -33,18 +66,16 @@ class WelcomePage extends React.Component {
           <Grid item>
             <Paper className={classes.paper}>
               <AppBar position="static" color="default">
-                <Tabs
-                  value={activeTab}
-                  onChange={this.handleTabChage}
-                  fullWidth
-                >
-                  <Tab className={classes.tab} label="Login" />
-                  <Tab className={classes.tab} label="Sign Up" />
+                <Tabs fullWidth value={activeTab} onChange={this.onTabChange} >
+                  <Tab label="Login"   className={classes.tab} value="login" />
+                  <Tab label="Sign Up" className={classes.tab} value="signup" />
                 </Tabs>
               </AppBar>
               <div className={classes.tabContent}>
-                {activeTab === 0 && <Login onSubmit={login} />}
-                {activeTab === 1 && <Signup onSubmit={signup} />}
+                <Form classes={classes}
+                  user={this.state.user}
+                  form={activeTab}
+                  handles={this.handles} />
               </div>
             </Paper>
           </Grid>

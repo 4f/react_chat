@@ -12,7 +12,7 @@ import {Message as styles} from 'styles/chats/chat'
 
 const ChatMessage = ({ classes, sender, user, content, createdAt, statusMessage }) => {
   const isMessageFromMe = user && sender._id === user._id
-  const userAvatar = <Avatar colorFrom={sender._id} label={sender.username} />
+  const userAvatar = <Avatar colorFrom={sender.username} label={sender.username} />
 
   if (statusMessage) return (
     <div className={classes.messageWrapper}>

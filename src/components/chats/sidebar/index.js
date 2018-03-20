@@ -14,7 +14,15 @@ import styles from 'styles/chats/sidebar'
 
 
 class Sidebar extends React.Component {
-  state = { activeTab: 0, search: '' }
+  state = { activeTab: 0, search: '', firstTime: true }
+  componentWillMount() { if ( !this.props.chat_id ) this.setState({ firstTime: false }) }
+  componentWillReceiveProps() {
+    if( this.props.chat && this.state.firstTime )
+    {
+      this.setState({ firstTime: false })
+      if ( !this.props.user.isInChat ) this.setState({ activeTab: 1 });
+    }
+  }
 
   onTabChange = (event, value) => this.setState({ activeTab: value })
 
@@ -31,10 +39,10 @@ class Sidebar extends React.Component {
         (this.state.activeTab === 1 || this.props.myHash[chat._id])
       )
       // .sort((one, two) => one.title.toLowerCase() <= two.title.toLowerCase() ? -1 : 1 )
-  } 
+  }
 
   render() {
-    const { create, classes, chats, chat, user } = this.props
+    const { create, classes, chats, chat, user, isSocket, myHash } = this.props
     const { activeTab, search } = this.state
 
     return (
@@ -54,8 +62,8 @@ class Sidebar extends React.Component {
         </div>
 
         <Divider />
-        <List classes={classes} chats={this.filter(chats)} user={user} active={chat} />
-        <NewButton classes={classes} create={create} />
+        <List classes={classes} chats={this.filter(chats)} user={user} active={chat} myHash={myHash} />
+        <NewButton classes={classes} create={create}  />
 
         <BottomNavigation value={activeTab} onChange={this.onTabChange} showLabels >
           <BottomNavigationAction className={classes.tab} label="My Chats" icon={<RestoreIcon />} />

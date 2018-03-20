@@ -1,37 +1,24 @@
 import types from 'constants/chats'
-import { http } from 'utils/call-api'
+import sockets from './sockets'
+import {redirect} from './services'
+import { generateRegisters } from 'utils/helpers'
 
-const log = function (error) { console.info(error) }
-const thens = {}
 
-
-const register = (symbol) => (payload) => (dispatch, getState) => {
-  const options = types[symbol]
-  dispatch({ type: options.REQUEST })
-  return http({ type: options, dispatch, getState, payload })
-    .then(thens[symbol])
-    .catch(log)
+const active = ({_id}) => (dispatch, getState) => {
+  const chat = getState().chats.chat
+  const _active = () => {
+    dispatch({ type: types.active, payload: { _id } })
+    if ( _id )  dispatch(sockets.mountChat(_id));
+    if ( chat ) dispatch(sockets.unmountChat(chat._id));
+    return Promise.resolve("Ok")
+  }
+  if ( _id == (chat && chat._id) ) return Promise.resolve("nothing to change");
+  if ( _id ) {
+    if ( chat === 0 && !getState().chats.hash[_id] ) return dispatch( redirect('/chat') );
+    return dispatch( chats.get({ _id }) ).then( (data) => ( !data || !data.error ) && _active() )
+  } else
+    return _active()
 }
 
-const all = register("all")
-const my = register("my")
-const active = register("active")
-const create = register("create")
-const join = register("join")
-const leave = register("leave")
-const remove = register("remove")
-const send = register("send")
-const notAcitve = () => ( { type: types.notAcitve })
-
-
-export default {
-  all,
-  my,
-  active,
-  create,
-  join,
-  leave,
-  remove,
-  send,
-  notAcitve
-}
+const chats = { ...generateRegisters(types), active }
+export default chats

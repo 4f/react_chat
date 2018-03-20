@@ -7,10 +7,8 @@ const bolds = [ 300, 400, 500, 600, 700, 800, 900, 'A100', 'A200', 'A300', 'A400
 
 export default function colorFrom(string) {
   try {
-    const index = string
-      .toString()
-      .split('')
-      .map(char => char.charCodeAt())
+    const index = (string || "")
+      .toString().split('').map(char => char.charCodeAt())
       .reduce((sum, num) => sum + num, 0)
 
     const colorIndex = index % names.length
