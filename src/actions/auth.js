@@ -5,7 +5,6 @@ const thens = {
   signup:  (json) => localStorage.setItem('token', json.token),
   login:   (json) => localStorage.setItem('token', json.token),
   logout:  (json) => localStorage.removeItem('token'),
-  session: (json) => {}
 }
 
 export default { ...generateRegisters(types, thens) }

@@ -14,6 +14,12 @@ class WelcomePage extends React.Component {
     submitted:  false,
     user:     { username:  '', password:  '', password2: '' }
   }
+  // componentWillMount() { console.log("WILL_MOUNT") }
+  // componentDidMount() { console.log("DID_MOUNT") }
+  // componentWillUnmount() { debugger; console.log("WILL_UNMOUNT") }
+  // componentDidUpdate() { console.log("DID_UPDATE") }
+  // componentWillUpdate(p, s) { console.log("WILL_UPDATE", p, s) }
+
   constructor(){
     super()
     this.handles = {

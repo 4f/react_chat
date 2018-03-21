@@ -3,6 +3,8 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { withStyles } from 'material-ui/styles'
+
 
 import { CircularProgress } from 'material-ui/Progress'
 import Paper from 'material-ui/Paper'
@@ -13,14 +15,17 @@ import Welcome from 'containers/welcome'
 import Chats from 'containers/chats'
 import Notice from 'components/notice'
 
+import styles from 'styles/app'
+
+
 const { session } = auth
 
 class RoutesContainer extends React.Component {
-  componentWillMount() { this.props.session() }
+  componentWillMount() { this.props.isAuth && this.props.session() }
   render() { 
     const { isAuth, notify: {error, success}, classes } = this.props
     return (
-      <React.Fragment>
+      <div className={classes.root}>
           { isAuth === 0 &&
         <Loader classes={classes} /> }
         <Router history={history}>
@@ -30,9 +35,9 @@ class RoutesContainer extends React.Component {
             <Redirect to="/" />
           </Switch>
         </Router>
-        <Notice notice={error} classes={classes.errors} horizontal={"left"}/>
+        <Notice notice={error}   classes={classes.errors}  horizontal={"left"}/>
         <Notice notice={success} classes={classes.success} horizontal={"right"} />
-      </React.Fragment>
+      </div>
       )
   }
 }
@@ -50,5 +55,5 @@ export default connect(
                }),
   dispatch  => bindActionCreators({
                   session } , dispatch)
- )( RoutesContainer )
+)( withStyles(styles)(RoutesContainer) )
 

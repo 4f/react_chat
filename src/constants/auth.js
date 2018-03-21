@@ -4,7 +4,8 @@ const types =  generateRequestSymbols( 'AUTH', {
   signup:       { method: "POST", path: "/signup" },
   login:        { method: "POST", path: "/login" },
   logout:       { method: "GET",  path: "/logout" },
-  session:      { method: "GET",  path: "/users/me" }
+  session:      { method: "GET",  path: "/users/me" },
+  edit:         { method: "POST", path: "/users/me" }
 } )
 
 export default types

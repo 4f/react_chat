@@ -1,18 +1,22 @@
 import types from 'constants/auth'
-import users from 'constants/users'
 
 
 const token = localStorage.getItem('token')
 const initialState = { isAuth: !!token, user: null, token }
+const User = {
+  _user: (_user) => _user.payload ? _user.payload.user : _user,
+  update: (in_state, _user) => {
+  let out_state = {isAuth: true, user: User._user(_user)}
+  out_state.token = _user.payload && _user.payload.token || in_state.token
+  return out_state
+} }
 
 export default function auth(state = initialState, action) {
   switch (action.type) {
+    case types.edit.SUCCESS:
     case types.signup.SUCCESS:
-    case types.login.SUCCESS:     return { ...state,
-                                    isAuth: true, user: action.payload.user,
-                                    token: action.payload.token }
-    case types.session.SUCCESS:   return { ...state,
-                                    isAuth: true, user: action.payload.user }
+    case types.login.SUCCESS:     
+    case types.session.SUCCESS:   return User.update(state, action)
     case types.signup.REQUEST:
     case types.login.REQUEST:
     case types.logout.REQUEST:
@@ -21,7 +25,6 @@ export default function auth(state = initialState, action) {
     case types.login.FAILURE:
     case types.session.FAILURE:
     case types.logout.SUCCESS:    return { isAuth: false, user: null, token:  '' }
-    case users.edit.SUCCESS:      return { ...state, user: action.payload.user }
     default:                      return state
   }
 }
