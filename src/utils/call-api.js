@@ -1,7 +1,6 @@
 import fetch from 'isomorphic-fetch'
 import {server} from 'constants/services'
-
-const BASE_URL = "http://localhost:8000/v1"
+import {apiUrl} from 'constants/config'
 
 const preparePath = (path, out_opt) => path.replace(/:[^/]*/g, str => {
   const key = str.slice(1)//without :
@@ -45,7 +44,7 @@ export default function callApi(path, token, options, payload) {
   const authHeaders = token ? { 'Authorization': `Bearer ${token}` } : {}
   if(!options.method || options.method !== 'POST') payload = undefined
 
-  return fetch( `${BASE_URL}${path}`, {
+  return fetch( `${apiUrl}${path}`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',

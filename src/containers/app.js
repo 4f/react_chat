@@ -23,7 +23,7 @@ const { session } = auth
 class RoutesContainer extends React.Component {
   componentWillMount() { this.props.isAuth && this.props.session() }
   render() { 
-    const { isAuth, notify: {error, success}, classes } = this.props
+    const { isAuth, notify, classes } = this.props
     return (
       <div className={classes.root}>
           { isAuth === 0 &&
@@ -35,8 +35,7 @@ class RoutesContainer extends React.Component {
             <Redirect to="/" />
           </Switch>
         </Router>
-        <Notice notice={error}   classes={classes.errors}  horizontal={"left"}/>
-        <Notice notice={success} classes={classes.success} horizontal={"right"} />
+        <Notice notify={notify} classes={classes}/>
       </div>
       )
   }

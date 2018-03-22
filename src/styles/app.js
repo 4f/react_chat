@@ -6,11 +6,16 @@ export default theme => ({
     height: '100%',
     backgroundColor: theme.palette.background.default,
   },
-  errors: {
+  error: {
+    margin: theme.spacing.unit,
     background: 'red'
   },
   success: {
+    margin: theme.spacing.unit,
     background: 'green'
+  },
+  notifyCloseIcon: {
+    pointer: 'hand'
   },
   loader: {
     width: "100%",

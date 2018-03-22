@@ -10,5 +10,5 @@ export const redirects = {
   }
 }
 
-export const apiUrl     = ''
-export const socketUrl  = 'ws://localhost:8000/'
+export const apiUrl     = 'http://localhost:8000/v1'
+export const socketUrl  = 'ws://localhost:8000'

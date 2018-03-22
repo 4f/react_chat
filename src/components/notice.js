@@ -1,40 +1,41 @@
 import React from 'react'
-import Snackbar from 'material-ui/Snackbar'
+import Snackbar, { SnackbarContent } from 'material-ui/Snackbar'
 import IconButton from 'material-ui/IconButton'
 import CloseIcon from 'material-ui-icons/Close'
 
 class Notice extends React.Component {
-  state = { open: false }
+  state = { open: false, list: [] }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.notice !== this.props.notice && nextProps.notice.message)
-      this.setState({ open: true }) 
+  componentWillReceiveProps({notify}) {
+    if (notify !== this.props.notify && notify.message) {
+      const obj = { open: true, list: [notify, ...this.state.list] }
+      this.setState(obj) 
+    }
   }
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.props.notice !== nextProps.notice || this.state.open !== nextState.open
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return this.props.notice !== nextProps.notice || this.state.open !== nextState.open
+  // }
   
-  close = () => this.setState({ open: false })
+  close = () => this.setState({ open: false, list: [] })
   render() {
-    const { notice: { message }, horizontal } = this.props
-    if (!message) return null
-
+    console.log("PRO", this.props)
     return (
-      <Snackbar anchorOrigin={{ vertical: "bottom", horizontal }}
+      <Snackbar anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
         open={this.state.open}
-        autoHideDuration={6000}
+        autoHideDuration={90000}
         onClose={this.close}
-        message={<span>{message}</span>}
-        SnackbarContentProps={{ classes: { root: this.props.classes } }}
-        action={[
-          <IconButton key="close" aria-label="Close" color="inherit"
-            onClick={this.close}
-          > <CloseIcon />
-          </IconButton>
-        ]}
-      />
-    )
-  }
-}
+      >
+      <div>
+          {this.state.list.map( (notify)=> (
+        <SnackbarContent className={this.props.classes[notify.status]}
+          message={notify.message}
+          action={[ <CloseIcon onClick={this.close} classes={{ root: this.props.classes.notifyCloseIcon}} /> ]}
+        />
+          ) ) }
+      </div>
+    </Snackbar>
+    
+      )
+} }
 
 export default Notice

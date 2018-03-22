@@ -4,19 +4,15 @@ import sockets from 'constants/sockets'
 
 const Message = {
   _message: ({ payload: {message} }) => ( message && message.content) || message,
-  getState: (in_state, key, _message) => {
+  getState: (key, _message) => {
     const message = Message._message(_message)
-    if ( !message ) return in_state
-    return { ...in_state, [key]: {message} }
+    return { status: key, message }
   }
 }
 
 const intialState = {
   serverStatus: {},
-  notify: {
-    error:   { message: null },
-    success: { message: null },
-  },
+  notify: { message: null, status:  null },
   isSocket: false
 }
 
@@ -30,8 +26,11 @@ export const serverStatus = (state = intialState.serverStatus, action) => {
 }
 
 export const notify = (state = intialState.notify, action) => {
-  if ( action.error )    return Message.getState(state, 'error',   action);
-  if ( action.success )  return Message.getState(state, 'success', action);
+  if ( action.error )    return Message.getState('error',   action)
+  if ( action.success )  return Message.getState('success', action)
+  if ( action.payload && action.payload.message )
+    if ( action.payload.success)
+                         return Message.getState('success', action)
   switch (action.type) {
     // case types.sockets.CONNECT_FAILURE:
     // case types.sockets.CONNECT_SUCCESS:
