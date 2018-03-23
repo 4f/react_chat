@@ -14,8 +14,8 @@ const mapState = ({ auth: {isAuth} }) => ({
   middlewer: {
     redirect:   isAuth === true ? redirects.welcome.path : 0,
     Component:  withStyles(styles)(WelcomeComponent)
-  } 
-})
+  } }
+)
 
 const mapDispatch = dispatch => ( {
   actions: {

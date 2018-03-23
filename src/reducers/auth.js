@@ -13,18 +13,19 @@ const User = {
 
 export default function auth(state = initialState, action) {
   switch (action.type) {
-    case types.edit.SUCCESS:
     case types.signup.SUCCESS:
-    case types.login.SUCCESS:     
-    case types.session.SUCCESS:   return User.update(state, action)
+    case types.login.SUCCESS:    localStorage.setItem('token', action.payload.token)//no-fallthrough
+    case types.edit.SUCCESS:
+    case types.session.SUCCESS:  return User.update(state, action)
     case types.signup.REQUEST:
     case types.login.REQUEST:
     case types.logout.REQUEST:
-    case types.session.REQUEST:   return { ...state, isAuth: 0 }
+    case types.session.REQUEST:  return { ...state, isAuth: 0 }
+    case types.logout.SUCCESS:   localStorage.removeItem('token')
+                                 return { isAuth: false, user: null, token: '' }
     case types.signup.FAILURE:
     case types.login.FAILURE:
-    case types.session.FAILURE:
-    case types.logout.SUCCESS:    return { isAuth: false, user: null, token:  '' }
-    default:                      return state
+    case types.session.FAILURE:  return { ...state, isAuth: false }
+    default:                     return state
   }
 }

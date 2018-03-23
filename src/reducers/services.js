@@ -17,12 +17,10 @@ const intialState = {
 }
 
 export const serverStatus = (state = intialState.serverStatus, action) => {
-  switch (action.type) {
-    case server.REQUEST:    return { ...state, [action.payload.type]: true }
-    case server.FAILURE:                  
-    case server.SUCCESS:    return { ...state, [action.payload.type]: false }
-    default:                return state
-  }
+  if (action.request)   return { ...state, [action.request]: true }
+  if (action.success)   return { ...state, [action.success]: false }
+  if (action.failure)   return { ...state, [action.failure]: false }
+                        return state
 }
 
 export const notify = (state = intialState.notify, action) => {

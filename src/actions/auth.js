@@ -7,4 +7,4 @@ const thens = {
   logout:  (json) => localStorage.removeItem('token'),
 }
 
-export default { ...generateRegisters(types, thens) }
+export default { ...generateRegisters(types) }
