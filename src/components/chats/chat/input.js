@@ -1,10 +1,7 @@
-import React from 'react'
-import { withStyles } from 'material-ui/styles'
-import Paper from 'material-ui/Paper'
+import React  from 'react'
+import Paper  from 'material-ui/Paper'
 import Button from 'material-ui/Button'
-import Input from 'material-ui/Input'
-
-import {Input as styles} from 'styles/chats/chat'
+import Input  from 'material-ui/Input'
 
 class MessageInput extends React.Component {
   state = { value: '' }
@@ -47,4 +44,4 @@ class MessageInput extends React.Component {
   }
 }
 
-export default withStyles(styles)(MessageInput)
+export default MessageInput

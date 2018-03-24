@@ -3,13 +3,12 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { withStyles } from 'material-ui/styles'
 
 
 import { CircularProgress } from 'material-ui/Progress'
 import Paper   from 'material-ui/Paper'
 
-import {routes as applyPropTypes} from 'prop_types/app'
+import {container as applyPropTypes} from 'prop_types/app'
 
 import history from 'utils/history'
 import auth    from 'actions/auth'
@@ -18,7 +17,6 @@ import Chats   from 'containers/chats'
 import Notice  from 'components/notice'
 
 import styles from 'styles/app'
-
 
 const { session } = auth
 
@@ -29,7 +27,8 @@ class RoutesContainer extends React.Component {
     return (
       <div className={classes.root}>
           { isAuth === 0 &&
-        <Loader classes={classes} /> }
+        <Loader classes={classes} /> 
+          }
         <Router history={history}>
           <Switch>
             <Route exact path="/(welcome)?" component={Welcome} />
@@ -56,6 +55,4 @@ export default connect(
                }),
   dispatch  => bindActionCreators({
                   session } , dispatch)
-)( withStyles(styles)(RoutesContainer) )
-
-applyPropTypes(RoutesContainer)
+)( styles( RoutesContainer ) )

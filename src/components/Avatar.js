@@ -3,8 +3,8 @@ import MUIAvatar from 'material-ui/Avatar'
 import getColor from 'utils/color-from'
 import titleInitials from 'utils/title-initials'
 
-import { withStyles } from 'material-ui/styles'
-import styles from 'styles/Avatar'
+import { avatar as applyPropTypes } from 'prop_types/app'
+import styles from 'styles/app'
 
 
 const Avatar = ({ colorFrom, classes, label, ...rest }) => (
@@ -13,4 +13,4 @@ const Avatar = ({ colorFrom, classes, label, ...rest }) => (
   </MUIAvatar>
 )
 
-export default withStyles(styles)(Avatar)
+export default styles( applyPropTypes(Avatar) )

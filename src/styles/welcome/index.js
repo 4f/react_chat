@@ -1,4 +1,6 @@
-export const Welcome = theme => ({
+import { withStyles } from 'material-ui/styles'
+
+const styles = theme => ({
   paper: {
     marginTop: 64 + theme.spacing.unit * 3,
     width: 500
@@ -19,3 +21,4 @@ export const Welcome = theme => ({
   }
 })
 
+export default (comp) => withStyles(styles)(comp)

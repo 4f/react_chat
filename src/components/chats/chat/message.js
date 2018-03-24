@@ -1,14 +1,11 @@
 import React from 'react'
 import classNames from 'classnames'
 import moment from 'moment'
-import { withStyles } from 'material-ui/styles'
 import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
 import Avatar from 'components/Avatar'
 
 import Color from 'utils/color-from'
-
-import {Message as styles} from 'styles/chats/chat'
 
 const ChatMessage = ({ classes, sender, user, content, createdAt, statusMessage }) => {
   const isMessageFromMe = user && sender._id === user._id
@@ -47,4 +44,4 @@ const ChatMessage = ({ classes, sender, user, content, createdAt, statusMessage 
   )
 }
 
-export default withStyles(styles)(ChatMessage)
+export default ChatMessage
