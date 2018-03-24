@@ -6,17 +6,16 @@ import Header from 'components/chats/header'
 
 class ChatPage extends React.Component {
   componentWillMount() {
-    const { actions: { Chat: { active, all }, Socket: {connect} } } = this.props
+    const { actions: { Chat: { all }, Socket: {connect} } } = this.props
     connect()
     all()
   }
   componentWillReceiveProps({ match: { params: { _id } } }) {
-    const { actions: { Chat: { active } } } = this.props
-    active({ _id })
+    this.props.actions.Chat.active({ _id })
   }
   
   render() {
-    const { isSocket, user, chats, myHash, chat, actions: { logout, redirect, userEdit, Chat: {join, leave, create, send, remove}, Socket: {} } } = this.props
+    const { isSocket, user, chats, myHash, chat, actions: { logout, redirect, userEdit, Chat: {join, leave, create, send, remove}} } = this.props
     return (
       <React.Fragment>
         <Header

@@ -1,13 +1,13 @@
 import types from 'constants/auth'
 
 
-const token = localStorage.getItem('token')
+const token        = localStorage.getItem('token')
 const initialState = { isAuth: !!token, user: null, token }
 const User = {
-  _user: (_user) => _user.payload ? _user.payload.user : _user,
+  _user:  (_user) => _user.payload ? _user.payload.user : _user,
   update: (in_state, _user) => {
-  let out_state = {isAuth: true, user: User._user(_user)}
-  out_state.token = _user.payload && _user.payload.token || in_state.token
+  let out_state    = { isAuth: true, user: User._user(_user) }
+  out_state.token  = ( _user.payload && _user.payload.token ) || in_state.token
   return out_state
 } }
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import Snackbar, { SnackbarContent } from 'material-ui/Snackbar'
-import IconButton from 'material-ui/IconButton'
 import CloseIcon from 'material-ui-icons/Close'
 
 class Notice extends React.Component {
@@ -8,7 +7,7 @@ class Notice extends React.Component {
 
   componentWillReceiveProps({notify}) {
     if (notify !== this.props.notify && notify.message) {
-      const obj = { open: true, list: [notify, ...this.state.list] }
+      const obj = { open: true, list: [{ ...notify, id: new Date().getTime().toString() }, ...this.state.list] }
       this.setState(obj) 
     }
   }
@@ -25,14 +24,17 @@ class Notice extends React.Component {
         autoHideDuration={90000}
         onClose={this.close}
       >
-      <div>
-          {this.state.list.map( (notify)=> (
+      <React.Fragment>
+          {this.state.list.map( (notify)=> {
+            console.log("FFF", notify)
+            return(
         <SnackbarContent className={this.props.classes[notify.status]}
+          key={notify.id}
           message={notify.message}
           action={[ <CloseIcon onClick={this.close} classes={{ root: this.props.classes.notifyCloseIcon}} /> ]}
         />
-          ) ) }
-      </div>
+          ) } ) }
+      </React.Fragment>
     </Snackbar>
     
       )

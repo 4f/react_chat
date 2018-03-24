@@ -7,13 +7,15 @@ import { withStyles } from 'material-ui/styles'
 
 
 import { CircularProgress } from 'material-ui/Progress'
-import Paper from 'material-ui/Paper'
+import Paper   from 'material-ui/Paper'
+
+import {routes as applyPropTypes} from 'prop_types/app'
 
 import history from 'utils/history'
-import auth from 'actions/auth'
+import auth    from 'actions/auth'
 import Welcome from 'containers/welcome'
-import Chats from 'containers/chats'
-import Notice from 'components/notice'
+import Chats   from 'containers/chats'
+import Notice  from 'components/notice'
 
 import styles from 'styles/app'
 
@@ -56,3 +58,4 @@ export default connect(
                   session } , dispatch)
 )( withStyles(styles)(RoutesContainer) )
 
+applyPropTypes(RoutesContainer)
