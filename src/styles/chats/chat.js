@@ -1,4 +1,6 @@
-export const Chat = theme => ({
+import { withStyles } from 'material-ui/styles'
+
+const styles = theme => ({
   chatLayout: {
     display: 'flex',
     justifyContent: 'center',
@@ -7,10 +9,7 @@ export const Chat = theme => ({
     height: '100%',
     width: '100%',
     overflow: 'hidden'
-  }
-})
-
-export const Input = theme => ({
+  },
   messageInputWrapper: {
     position: 'fixed',
     left: 'auto',
@@ -21,10 +20,7 @@ export const Input = theme => ({
   },
   messageInput: {
     padding: theme.spacing.unit * 2
-  }
-})
-
-export const Message = theme => ({
+  },
   messageWrapper: {
     display: 'flex',
     justifyContent: 'flex-start',
@@ -60,10 +56,7 @@ export const Message = theme => ({
   statusMessageUser: {
     fontWeight: "700",
     display: 'inline'
-  }
-})
-
-export const Messages = theme => ({
+  },
   messagesWrapper: {
     overflowX: 'scroll',
     height: '100%',
@@ -75,3 +68,5 @@ export const Messages = theme => ({
     padding: theme.spacing.unit * 3
   }
 })
+
+export default (comp) => withStyles(styles)(comp)

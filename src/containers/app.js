@@ -3,7 +3,6 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { withStyles } from 'material-ui/styles'
 
 
 import { CircularProgress } from 'material-ui/Progress'
@@ -16,6 +15,7 @@ import Chats from 'containers/chats'
 import Notice from 'components/notice'
 
 import styles from 'styles/app'
+import {container as applyPropTypes} from 'prop_types/app'
 
 
 const { session } = auth
@@ -54,5 +54,5 @@ export default connect(
                }),
   dispatch  => bindActionCreators({
                   session } , dispatch)
-)( withStyles(styles)(RoutesContainer) )
+)(styles( applyPropTypes(RoutesContainer) ) )
 

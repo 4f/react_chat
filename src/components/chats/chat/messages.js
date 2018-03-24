@@ -1,10 +1,7 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
-import { withStyles } from 'material-ui/styles'
 import Typography from 'material-ui/Typography'
 import Paper from 'material-ui/Paper'
 import Message from './message'
-import {Messages as styles} from 'styles/chats/chat'
 
 class ChatMessageList extends React.Component {
   componentDidMount() { this.scrollDownHistory() }
@@ -23,7 +20,7 @@ class ChatMessageList extends React.Component {
         if( chat.messages && chat.messages.length )
           return (
             <div className={classes.messagesWrapper} ref="messagesWrapper">
-              <List messages={chat.messages} user={user} />
+              <List messages={chat.messages} classes={classes} user={user} />
             </div> )
         else
           return <Empty />
@@ -31,7 +28,7 @@ class ChatMessageList extends React.Component {
 }
 
 const List = (props) => props.messages.map( (message) => 
-  <Message key={message._id} {...message} user={props.user} /> )
+  <Message key={message._id} {...message} user={props.user} classes={props.classes} /> )
 
 const NoChat = ({classes}) => (
   <Paper className={classes.paper}>
@@ -54,4 +51,4 @@ const Empty = () => (
 )
 
 
-export default withRouter(withStyles(styles)(ChatMessageList))
+export default ChatMessageList

@@ -1,7 +1,8 @@
 import React from 'react'
 import Snackbar, { SnackbarContent } from 'material-ui/Snackbar'
-import IconButton from 'material-ui/IconButton'
 import CloseIcon from 'material-ui-icons/Close'
+import { notice as applyPropTypes } from 'prop_types/app'
+
 
 class Notice extends React.Component {
   state = { open: false, list: [] }
@@ -28,6 +29,7 @@ class Notice extends React.Component {
       <div>
           {this.state.list.map( (notify)=> (
         <SnackbarContent className={this.props.classes[notify.status]}
+          key={notify.message}
           message={notify.message}
           action={[ <CloseIcon onClick={this.close} classes={{ root: this.props.classes.notifyCloseIcon}} /> ]}
         />
@@ -38,4 +40,4 @@ class Notice extends React.Component {
       )
 } }
 
-export default Notice
+export default applyPropTypes(Notice)
