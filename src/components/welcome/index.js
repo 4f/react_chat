@@ -7,6 +7,9 @@ import Paper from 'material-ui/Paper'
 import Tabs, { Tab } from 'material-ui/Tabs'
 import Form from './form'
 
+import { index as applyPropTypes } from 'prop_types/welcome'
+
+
 
 class WelcomePage extends React.Component {
   state = {
@@ -35,10 +38,15 @@ class WelcomePage extends React.Component {
   onTabChange        = (event, value) => { this.setState({ activeTab: value, submitted: false }) }
   registerInput      = (el) => this.inputForValidation = el
   trySubmit          = () => this.setState({ submitted: true })
-  checkError         = (name) => this.state.submitted && (
-    name === 'password2' ? this.state.user.password !== this.state.user.password2 :  !this.state.user[name] )
-  setRepitValidation = () => this.inputForValidation && this.inputForValidation.setCustomValidity     (
-    this.state.user.password === this.state.user.password2 ? "" : "repeated password not same" )
+  checkError         = (name) =>
+    this.state.submitted 
+      &&
+    ( name === 'password2' ? this.state.user.password !== this.state.user.password2 :  !this.state.user[name] )
+  setRepitValidation = () =>
+    this.inputForValidation
+      &&
+    this.inputForValidation.setCustomValidity( this._textValiidity() )
+  _textValiidity     = () => this.state.user.password === this.state.user.password2 ? "" : "repeated password not same"
   resetSubmit        = () => this.setState({ 
     submitted: false,
     user: { username: "", password: "", password2: "" } })
@@ -91,5 +99,5 @@ class WelcomePage extends React.Component {
   }
 }
 
-export default WelcomePage
+export default applyPropTypes(WelcomePage)
 

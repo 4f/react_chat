@@ -38,8 +38,8 @@ class UserMenu extends React.Component {
   } 
 
   logout = () => {
-    this.props.logout()
     this.close()
+    this.props.logout()
   }
 
   render() {

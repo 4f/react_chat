@@ -3,7 +3,7 @@ import { withStyles } from 'material-ui/styles'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
-import Avatar from 'components/Avatar'
+import Avatar from 'components/ava'
 
 
 
@@ -24,7 +24,9 @@ class ChatHeader extends React.Component {
     return (
       <AppBar className={classes.appBar} color="primary">
         <Toolbar color="contrast">
-          { !!chat && <Avatar colorFrom={chat._id} label={chat.title} /> }
+            { !!chat &&
+          <Avatar colorFrom={chat._id} label={chat.title} />
+            }
           <Typography variant="title" align="left" className={classes.appBarTitleLeft}>
 
             { !chat &&  "DogeCodes React Chat#1" }
@@ -40,18 +42,16 @@ class ChatHeader extends React.Component {
             />
 
           </Typography>
-          <Typography variant="title" align="left" className={classes.appBarTitleRight}>
 
+          <Typography variant="title" align="left" className={classes.appBarTitleRight}>
             <UserMenu classes={classes}
               logout={logout}
               edit={editUser}
               toggleModal={this.toggleModal}
-              user={user}
-            />
+              user={user} />
           </Typography>
-
+          
           <Avatar colorFrom={user.username} label={user.username} />
-
           <Modal classes={classes}
             on={this.state.isModal}
             toggle={this.toggleModal}

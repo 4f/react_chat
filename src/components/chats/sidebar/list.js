@@ -3,6 +3,9 @@ import List from 'material-ui/List'
 import Typography from 'material-ui/Typography'
 import Item from './item'
 
+import { list as applyPropTypes } from 'prop_types/chats/sidebar'
+
+
 const ChatList = ({ classes, chats, user, active, disabled, myHash }) => (
   <List className={classes.chatsList}>
     { chats && chats.length
@@ -28,4 +31,4 @@ const Empty = (props) => (
   </Typography>
 )
 
-export default ChatList
+export default applyPropTypes(ChatList)

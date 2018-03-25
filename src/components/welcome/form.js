@@ -1,6 +1,8 @@
-import React from 'react';
-import TextField from 'material-ui/TextField';
-import Button from 'material-ui/Button';
+import React from 'react'
+import TextField from 'material-ui/TextField'
+import Button from 'material-ui/Button'
+
+import {form as applyPropTypes} from 'prop_types/welcome'
 
 
 const AuthForm = ({ form, handles: {trySubmit, setInput, change, check, reset, submit}, user, classes } ) => (
@@ -46,4 +48,4 @@ const AuthForm = ({ form, handles: {trySubmit, setInput, change, check, reset, s
     </form>
 )
 
-export default AuthForm
+export default applyPropTypes(AuthForm)

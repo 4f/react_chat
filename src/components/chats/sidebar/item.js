@@ -6,7 +6,7 @@ import Tooltip from 'material-ui/Tooltip'
 import MoreIcon from 'material-ui-icons/MoreVert'
 
 
-import Avatar from 'components/Avatar'
+import Avatar from 'components/ava'
 
 const ChatListItem = ({ classes, chat, active, user, disabled, member }) => {
   const className = () => ( active && active._id === chat._id ? classes.activeItem : classes.item )

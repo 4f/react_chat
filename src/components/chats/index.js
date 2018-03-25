@@ -16,7 +16,7 @@ class ChatPage extends React.Component {
   }
   
   render() {
-    const { isSocket, user, chats, myHash, chat, actions: { logout, redirect, userEdit, Chat: {join, leave, create, send, remove}, Socket: {} } } = this.props
+    const { isSocket, user, chats, myHash, chat, actions: { logout, redirect, userEdit, Chat: {join, leave, create, send, remove} } } = this.props
     return (
       <React.Fragment>
         <Header
@@ -36,7 +36,6 @@ class ChatPage extends React.Component {
           chat={chat}
           chat_id={this.props.match.params._id}
           user={user}
-          isSocket={isSocket}
         />
         <Chat
           chat={chat}

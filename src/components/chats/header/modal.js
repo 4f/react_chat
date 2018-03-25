@@ -5,7 +5,7 @@ import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button'
 import TextField from 'material-ui/TextField'
 import Toolbar from 'material-ui/Toolbar'
-import Avatar from 'components/Avatar'
+import Avatar from 'components/ava'
 
 class EditModal extends React.Component {
   state = { username: '', firstName: '', lastName: '' }
