@@ -13,7 +13,6 @@ export const index = (comp) => {
 }
 
 export const list = (comp) => {
-  
   comp.propTypes = {
     classes:  PT.object,
     chats:    PT.array.isRequired,
@@ -23,6 +22,18 @@ export const list = (comp) => {
   }
   return comp
 }
+
+export const item = (comp) => {
+  comp.propTypes = {
+    classes:  PT.object,
+    chat:     PT.object.isRequired,
+    user:     PT.object.isRequired,
+    active:   PT.object,
+    member:   PT.bool.isRequired
+  }
+  return comp
+}
+
 export const newButton = (comp) => {
   comp.propTypes = {
     classes:  PT.object.isRequired,
@@ -34,5 +45,6 @@ export const newButton = (comp) => {
 export default {
   index,
   list,
-  newButton
+  newButton,
+  item
 }

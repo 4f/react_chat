@@ -45,7 +45,6 @@ class Sidebar extends React.Component {
   render() {
     const { create, classes, chats, chat, user, myHash } = this.props
     const { activeTab, search } = this.state
-    console.log("URRRRL", this.props)
 
     return (
       <Drawer classes={{ paper: classes.drawerPaper }} variant="permanent" >

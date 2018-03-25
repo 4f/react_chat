@@ -5,14 +5,15 @@ import { ListItem, ListItemText } from 'material-ui/List'
 import Tooltip from 'material-ui/Tooltip'
 import MoreIcon from 'material-ui-icons/MoreVert'
 
-
 import Avatar from 'components/ava'
 
-const ChatListItem = ({ classes, chat, active, user, disabled, member }) => {
+import { item as applyPropTypes } from 'prop_types/chats/sidebar'
+
+const ChatListItem = ({ classes, chat, active, user, member }) => {
   const className = () => ( active && active._id === chat._id ? classes.activeItem : classes.item )
   const wrapTooltip = (str) => str ? str.match(/[^ ]{1,49}/g).join(" ") : str
   const secondary = () => {
-    let first = "enemy"
+    let first = "alien"
     if (chat.creator._id === user._id)
       first = "creator"
     else if (member)
@@ -31,18 +32,18 @@ const ChatListItem = ({ classes, chat, active, user, disabled, member }) => {
       component={Link}
       to={`/chat/${chat._id}`}
       className={className()}
-      disabled={disabled}
     >
       <Tooltip title={wrapTooltip(chat.title)} placement="bottom-start">
         <Avatar colorFrom={chat._id} label={chat.title} />
       </Tooltip>
-        <MoreIcon className={classes.moreIcon} />
-        <ListItemText
-          primary={chat.title}
-          classes={{ primary: classes.itemText, secondary: classes.itemText2, root: classes.itemRoot }}
-          secondary={secondary()} />
+      <MoreIcon className={classes.moreIcon} />
+      <ListItemText
+        primary={chat.title}
+        classes={{ primary: classes.itemText, secondary: classes.itemText2, root: classes.itemRoot }}
+        secondary={secondary()}
+      />
     </ListItem>
   )
 }
 
-export default ChatListItem
+export default applyPropTypes( ChatListItem )

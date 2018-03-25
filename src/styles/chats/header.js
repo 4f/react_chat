@@ -1,4 +1,6 @@
-export default theme => ({
+import { withStyles } from 'material-ui/styles'
+
+const styles = theme => ({
   appBar: {
     position: 'fixed',
     width: `calc(100% - 320px)`,
@@ -46,3 +48,5 @@ export default theme => ({
     flex: 1
   }
 })
+
+export default (comp) => withStyles(styles)(comp)

@@ -6,7 +6,7 @@ import Item from './item'
 import { list as applyPropTypes } from 'prop_types/chats/sidebar'
 
 
-const ChatList = ({ classes, chats, user, active, disabled, myHash }) => (
+const ChatList = ({ classes, chats, user, active, myHash }) => (
   <List className={classes.chatsList}>
     { chats && chats.length
       ? 
@@ -18,7 +18,7 @@ const ChatList = ({ classes, chats, user, active, disabled, myHash }) => (
         active={active}
         user={user}
         member={myHash[chat._id]}
-        disabled={disabled} />)
+      />)
       :
       <Empty classes={classes} /> }
   </List>

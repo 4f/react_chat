@@ -7,6 +7,8 @@ import TextField from 'material-ui/TextField'
 import Toolbar from 'material-ui/Toolbar'
 import Avatar from 'components/ava'
 
+import { modal as applyPropTypes } from 'prop_types/chats/header'
+
 class EditModal extends React.Component {
   state = { username: '', firstName: '', lastName: '' }
   
@@ -64,4 +66,4 @@ class EditModal extends React.Component {
 }
 
 
-export default EditModal
+export default applyPropTypes( EditModal )

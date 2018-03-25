@@ -1,17 +1,15 @@
 import React from 'react'
-import { withStyles } from 'material-ui/styles'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
+
 import Avatar from 'components/ava'
-
-
-
 import ChatMenu from './chat_menu'
 import UserMenu from './user_menu'
 import Modal from './modal'
 
 import styles from 'styles/chats/header'
+import { index as applyPropTypes } from 'prop_types/chats/header'
 
 class ChatHeader extends React.Component {
   state = { isModal: false }
@@ -29,8 +27,9 @@ class ChatHeader extends React.Component {
             }
           <Typography variant="title" align="left" className={classes.appBarTitleLeft}>
 
-            { !chat &&  "DogeCodes React Chat#1" }
-    
+              { !chat ? 
+            "DogeCodes React Chat#1"
+              :
             <ChatMenu
               classes={classes}
               chat={chat}
@@ -40,6 +39,7 @@ class ChatHeader extends React.Component {
               leave={leaveChat}
               delete={deleteChat}
             />
+              }
 
           </Typography>
 
@@ -64,4 +64,4 @@ class ChatHeader extends React.Component {
   }
 };
 
-export default withStyles(styles)(ChatHeader)
+export default styles( applyPropTypes(ChatHeader) )
