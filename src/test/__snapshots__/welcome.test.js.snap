@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<WelcomePage /> renders correctly 1`] = `
+Array [
+  <header
+    className="MuiPaper-root-195 MuiPaper-shadow4-201 MuiAppBar-root-187 MuiAppBar-positionFixed-188 MuiAppBar-colorPrimary-193 mui-fixed"
+>
+    <div
+        className="MuiToolbar-root-222 MuiToolbar-gutters-223"
+    >
+        <h2
+            className="MuiTypography-root-224 MuiTypography-title-230 MuiTypography-colorInherit-243"
+            style={
+                Object {
+                    "flex": 1,
+                  }
+            }
+        >
+            DogeCodes React Chat
+        </h2>
+    </div>
+</header>,
+  <div
+    className="MuiGrid-typeContainer-248 MuiGrid-justify-xs-center-265"
+>
+    <div
+        className="MuiGrid-typeItem-249"
+    >
+        <div
+            className="MuiPaper-root-195 MuiPaper-shadow2-199 MuiPaper-rounded-196 paper"
+        >
+            <header
+                className="MuiPaper-root-195 MuiPaper-shadow4-201 MuiAppBar-root-187 MuiAppBar-positionStatic-191 MuiAppBar-colorDefault-192"
+            >
+                <div
+                    className="MuiTabs-root-338"
+                >
+                    <div
+                        className="MuiTabs-flexContainer-339"
+                    >
+                        <div
+                            className="MuiTabs-scrollingContainer-340 MuiTabs-fixed-341"
+                            onScroll={[Function]}
+                            role="tablist"
+                            style={
+                                Object {
+                                    "marginBottom": 0,
+                                  }
+                            }
+                        >
+                            <div
+                                className="MuiTabs-flexContainer-339"
+                            >
+                                <button
+                                    aria-selected={true}
+                                    className="MuiButtonBase-root-361 MuiTab-root-345 MuiTab-rootInherit-347 MuiTab-rootInheritSelected-354 MuiTab-fullWidth-356 tab"
+                                    disabled={false}
+                                    onBlur={[Function]}
+                                    onClick={[Function]}
+                                    onFocus={[Function]}
+                                    onKeyDown={[Function]}
+                                    onKeyUp={[Function]}
+                                    onMouseDown={[Function]}
+                                    onMouseLeave={[Function]}
+                                    onMouseUp={[Function]}
+                                    onTouchEnd={[Function]}
+                                    onTouchMove={[Function]}
+                                    onTouchStart={[Function]}
+                                    role="tab"
+                                    style={undefined}
+                                    tabIndex={0}
+                                    type="button"
+                                >
+                                    <span
+                                        className="MuiTab-wrapper-357"
+                                    >
+                                        <span
+                                            className="MuiTab-labelContainer-358"
+                                        >
+                                            <span
+                                                className="MuiTab-label-359"
+                                            >
+                                                Login
+                                            </span>
+                                        </span>
+                                    </span>
+                                    <span
+                                        className="MuiTouchRipple-root-366"
+                                    />
+                                </button>
+                                <button
+                                    aria-selected={false}
+                                    className="MuiButtonBase-root-361 MuiTab-root-345 MuiTab-rootInherit-347 MuiTab-fullWidth-356 tab"
+                                    disabled={false}
+                                    onBlur={[Function]}
+                                    onClick={[Function]}
+                                    onFocus={[Function]}
+                                    onKeyDown={[Function]}
+                                    onKeyUp={[Function]}
+                                    onMouseDown={[Function]}
+                                    onMouseLeave={[Function]}
+                                    onMouseUp={[Function]}
+                                    onTouchEnd={[Function]}
+                                    onTouchMove={[Function]}
+                                    onTouchStart={[Function]}
+                                    role="tab"
+                                    style={undefined}
+                                    tabIndex={0}
+                                    type="button"
+                                >
+                                    <span
+                                        className="MuiTab-wrapper-357"
+                                    >
+                                        <span
+                                            className="MuiTab-labelContainer-358"
+                                        >
+                                            <span
+                                                className="MuiTab-label-359"
+                                            >
+                                                Sign Up
+                                            </span>
+                                        </span>
+                                    </span>
+                                    <span
+                                        className="MuiTouchRipple-root-366"
+                                    />
+                                </button>
+                            </div>
+                            <span
+                                className="MuiTabIndicator-root-363 MuiTabIndicator-colorSecondary-365"
+                                style={
+                                    Object {
+                                        "left": 0,
+                                        "width": 0,
+                                      }
+                                }
+                            />
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div
+                className="tabContent"
+            >
+                Form
+            </div>
+        </div>
+    </div>
+</div>,
+]
+`;

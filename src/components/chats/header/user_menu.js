@@ -9,6 +9,7 @@ import { ListItemIcon, ListItemText } from 'material-ui/List'
 import InboxIcon from 'material-ui-icons/ExitToApp'
 import DraftsIcon from 'material-ui-icons/Edit'
 
+import { userMenu as applyPropTypes } from 'prop_types/chats/header'
 
 class UserMenu extends React.Component {
   state = { anchorEl: null }
@@ -38,8 +39,8 @@ class UserMenu extends React.Component {
   } 
 
   logout = () => {
-    this.props.logout()
     this.close()
+    this.props.logout()
   }
 
   render() {
@@ -85,4 +86,4 @@ class UserMenu extends React.Component {
   }
 }
 
-export default UserMenu
+export default applyPropTypes( UserMenu )

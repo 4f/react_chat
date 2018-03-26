@@ -17,6 +17,7 @@ import Chats   from 'containers/chats'
 import Notice  from 'components/notice'
 
 import styles from 'styles/app'
+import {container as applyPropTypes} from 'prop_types/app'
 
 const { session } = auth
 
@@ -55,4 +56,9 @@ export default connect(
                }),
   dispatch  => bindActionCreators({
                   session } , dispatch)
+<<<<<<< HEAD
 )( styles( RoutesContainer ) )
+=======
+)(styles( applyPropTypes(RoutesContainer) ) )
+
+>>>>>>> tmpp

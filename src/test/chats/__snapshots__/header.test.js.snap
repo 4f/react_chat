@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ChatHeader /> renders correctly 1`] = `
+<header
+  className="MuiPaper-root-92 MuiPaper-shadow4-98 MuiAppBar-root-84 MuiAppBar-positionFixed-85 MuiAppBar-colorPrimary-90 mui-fixed ChatHeader-appBar-74"
+>
+  <div
+    className="MuiToolbar-root-119 MuiToolbar-gutters-120"
+    color="contrast"
+  >
+    Avatar
+    <h2
+      className="MuiTypography-root-121 MuiTypography-title-127 MuiTypography-alignLeft-133 ChatHeader-appBarTitleLeft-75"
+    >
+      ChatMenu
+    </h2>
+    <h2
+      className="MuiTypography-root-121 MuiTypography-title-127 MuiTypography-alignLeft-133 ChatHeader-appBarTitleRight-78"
+    >
+      UserMenu
+    </h2>
+    Avatar
+  </div>
+</header>
+`;
+
+exports[`<ChatHeader /> renders without active chat 1`] = `
+<header
+  className="MuiPaper-root-92 MuiPaper-shadow4-98 MuiAppBar-root-84 MuiAppBar-positionFixed-85 MuiAppBar-colorPrimary-90 mui-fixed ChatHeader-appBar-74"
+>
+  <div
+    className="MuiToolbar-root-119 MuiToolbar-gutters-120"
+    color="contrast"
+  >
+    Avatar
+    <h2
+      className="MuiTypography-root-121 MuiTypography-title-127 MuiTypography-alignLeft-133 ChatHeader-appBarTitleLeft-75"
+    >
+      ChatMenu
+    </h2>
+    <h2
+      className="MuiTypography-root-121 MuiTypography-title-127 MuiTypography-alignLeft-133 ChatHeader-appBarTitleRight-78"
+    >
+      UserMenu
+    </h2>
+    Avatar
+  </div>
+</header>
+`;

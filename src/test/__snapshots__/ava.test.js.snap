@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Avatar /> renders correctly 1`] = `
+<div
+  className="MuiAvatar-root-16 MuiAvatar-colorDefault-17 Avatar-avatar-15"
+  style={
+    Object {
+      "backgroundColor": "#ffc107",
+    }
+  }
+>
+  S
+</div>
+`;

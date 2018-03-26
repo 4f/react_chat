@@ -6,6 +6,9 @@ import Typography from 'material-ui/Typography';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 
+import { newButton as applyPropTypes } from 'prop_types/chats/sidebar'
+
+
 class NewChatButton extends React.Component {
   state = { open: false, title: '' }
 
@@ -62,4 +65,4 @@ class NewChatButton extends React.Component {
   }
 }
 
-export default NewChatButton
+export default applyPropTypes(NewChatButton)

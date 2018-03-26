@@ -1,4 +1,6 @@
-export default theme => ({
+import { withStyles } from 'material-ui/styles'
+
+const styles = theme => ({
   item: {
     padding: "6px 4px 6px 12px",
     "&:hover": {
@@ -89,3 +91,5 @@ export default theme => ({
     padding: theme.spacing.unit * 3
   }
 })
+
+export default (comp) => withStyles(styles)(comp)

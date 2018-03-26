@@ -1,5 +1,4 @@
 import React from 'react'
-import { withStyles } from 'material-ui/styles'
 import Drawer from 'material-ui/Drawer'
 import Divider from 'material-ui/Divider'
 import BottomNavigation, { BottomNavigationAction } from 'material-ui/BottomNavigation'
@@ -11,6 +10,7 @@ import Input, { InputAdornment } from 'material-ui/Input';
 import List from './list'
 import NewButton from './new'
 import styles from 'styles/chats/sidebar'
+import { index as applyPropTypes } from 'prop_types/chats/sidebar'
 
 
 class Sidebar extends React.Component {
@@ -42,12 +42,11 @@ class Sidebar extends React.Component {
   }
 
   render() {
-    const { create, classes, chats, chat, user, isSocket, myHash } = this.props
+    const { create, classes, chats, chat, user, myHash } = this.props
     const { activeTab, search } = this.state
 
     return (
       <Drawer classes={{ paper: classes.drawerPaper }} variant="permanent" >
-
 
         <div className={classes.drawerHeader}>
           <Input type='text' fullWidth margin="dense" placeholder="Search chats..."
@@ -60,10 +59,10 @@ class Sidebar extends React.Component {
             }
           />
         </div>
-
         <Divider />
+
         <List classes={classes} chats={this.filter(chats)} user={user} active={chat} myHash={myHash} />
-        <NewButton classes={classes} create={create}  />
+        <NewButton classes={classes} create={create} />
 
         <BottomNavigation value={activeTab} onChange={this.onTabChange} showLabels >
           <BottomNavigationAction className={classes.tab} label="My Chats" icon={<RestoreIcon />} />
@@ -75,4 +74,4 @@ class Sidebar extends React.Component {
   }
 }
 
-export default withStyles(styles)(Sidebar)
+export default styles( applyPropTypes(Sidebar) )

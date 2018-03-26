@@ -3,10 +3,14 @@ import classNames from 'classnames'
 import moment from 'moment'
 import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
-import Avatar from 'components/Avatar'
+import Avatar from 'components/ava'
 
 import Color from 'utils/color-from'
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> tmpp
 const ChatMessage = ({ classes, sender, user, content, createdAt, statusMessage }) => {
   const isMessageFromMe = user && sender._id === user._id
   const userAvatar = <Avatar colorFrom={sender.username} label={sender.username} />

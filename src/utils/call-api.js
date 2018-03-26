@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import {apiUrl} from 'constants/config'
+import config from 'constants/config'
 
 const preparePath = (path, out_opt) => path.replace(/:[^/]*/g, str => {
   const key = str.slice(1)//without :
@@ -36,7 +36,7 @@ export default function callApi(path, token, options, payload) {
   const authHeaders = token ? { 'Authorization': `Bearer ${token}` } : {}
   if(!options.method || options.method !== 'POST') payload = undefined
 
-  return fetch( `${apiUrl}${path}`, {
+  return fetch( `${config.apiUrl}${path}`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',

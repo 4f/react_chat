@@ -7,6 +7,7 @@ import Join from 'material-ui-icons/CallMerge'
 import Root from 'material-ui-icons/FileUpload'
 import Delete from 'material-ui-icons/Delete'
 
+import { chatMenu as applyPropTypes } from 'prop_types/chats/header'
 
 class ChatMenu extends React.Component {
   state = { anchorEl: null }
@@ -54,8 +55,6 @@ class ChatMenu extends React.Component {
     const { user, chat, classes } = this.props
     const { anchorEl } = this.state
 
-    if (!chat) return null
-    
     return (
       <React.Fragment>
         <Button size="small" color="inherit" aria-haspopup="true"
@@ -96,4 +95,4 @@ class ChatMenu extends React.Component {
   }
 }
 
-export default ChatMenu
+export default applyPropTypes( ChatMenu )
