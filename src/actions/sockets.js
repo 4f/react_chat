@@ -27,7 +27,7 @@ const connect = () => (dispatch, getState) => {
     'deleted-chat': types.DELETE_CHAT,
   };
 
-  for (const key in method_type) { socket.on(key, payload => dispatch({ type: method_type[key], payload })); }
+  Object.keys(method_type).map(key => socket.on(key, payload => dispatch({ type: method_type[key], payload })));
 
   // socket.on('connect', () => dispatch({ type: types.connection.SUCCESS }) )
   // .on('error', (error) => dispatch({ type: types.connection.FAILURE, payload: new Error(`Connection: ${error}`) }) )

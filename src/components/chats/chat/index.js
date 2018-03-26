@@ -1,9 +1,10 @@
 import React from 'react';
-import Messages from './messages';
-import InputMessage from './input';
 
 import styles from 'styles/chats/chat';
 import { index as applyPropTypes } from 'prop_types/chats/chat';
+
+import Messages from './messages';
+import InputMessage from './input';
 
 const Chat = ({
   chat, classes, join, send, user,

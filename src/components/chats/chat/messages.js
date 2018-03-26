@@ -1,16 +1,17 @@
 import React from 'react';
 import Typography from 'material-ui/Typography';
 import Paper from 'material-ui/Paper';
-import Message from './message';
 
 import { messages as applyPropTypes } from 'prop_types/chats/chat';
+
+import Message from './message';
 
 class ChatMessageList extends React.Component {
   componentDidMount() { this.scrollDownHistory(); }
   componentDidUpdate() { this.scrollDownHistory(); }
 
   scrollDownHistory() {
-    const messagesWrapper = this.refs.messagesWrapper;
+    const { messagesWrapper } = this.refs;
     if (messagesWrapper) messagesWrapper.scrollTop = messagesWrapper.scrollHeight;
   }
 
