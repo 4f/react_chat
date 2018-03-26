@@ -15,7 +15,7 @@ const urls = isProduct ? {
   apiUrl:    'https://dogecodes-chat-api.herokuapp.com/v1',
   socketUrl: 'wss://dogecodes-chat-api.herokuapp.com/'
 } : {
-  apiUrl:    'wss://dogecodes-chat-api.herokuapp.com/',
+  apiUrl:    'http://localhost:8000/v1',
   socketUrl: 'ws://localhost:8000/'
 }
 

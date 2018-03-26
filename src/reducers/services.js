@@ -25,9 +25,9 @@ export const serverStatus = (state = intialState.serverStatus, action) => {
 export const notify = (state = intialState.notify, action) => {
   if ( action.error )    return Message.getState('error',   action)
   if ( action.success )  return Message.getState('success', action)
-  if ( action.payload && action.payload.message )
-    if ( action.payload.success)
-                         return Message.getState('success', action)
+  // if ( action.payload && action.payload.message )
+  //   if ( action.payload.success)
+  //                        return Message.getState('success', action)
   switch (action.type) {
     // case types.sockets.CONNECT_FAILURE:
     // case types.sockets.CONNECT_SUCCESS:

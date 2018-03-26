@@ -11,7 +11,7 @@ import { item as applyPropTypes } from 'prop_types/chats/sidebar'
 
 const ChatListItem = ({ classes, chat, active, user, member }) => {
   const className = () => ( active && active._id === chat._id ? classes.activeItem : classes.item )
-  const wrapTooltip = (str) => str ? str.match(/[^ ]{1,49}/g).join(" ") : str
+  const wrapTooltip = (str) => str ? (str.match(/[^ ]{1,49}/g) || []).join(" ") : str
   const secondary = () => {
     let first = "alien"
     if (chat.creator._id === user._id)
