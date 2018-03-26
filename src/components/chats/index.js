@@ -1,25 +1,31 @@
-import React from 'react'
-import Sidebar from './sidebar'
-import Chat from 'components/chats/chat'
-import Header from 'components/chats/header'
+import React from 'react';
+import Sidebar from './sidebar';
+import Chat from 'components/chats/chat';
+import Header from 'components/chats/header';
 // import { messages } from 'mock-data'
 
 class ChatPage extends React.Component {
   componentWillMount() {
-    const { actions: { Chat: { all }, Socket: {connect} } } = this.props
-    connect()
-    all()
+    const { actions: { Chat: { all }, Socket: { connect } } } = this.props;
+    connect();
+    all();
   }
   componentWillReceiveProps({ match: { params: { _id } } }) {
-    this.props.actions.Chat.active({ _id })
+    this.props.actions.Chat.active({ _id });
   }
-  
+
   render() {
-    const { user, chats, myHash, chat, actions: { logout, redirect, userEdit, Chat: {join, leave, create, send, remove} } } = this.props
+    const {
+      user, chats, myHash, chat, actions: {
+        logout, redirect, userEdit, Chat: {
+          join, leave, create, send, remove,
+        },
+      },
+    } = this.props;
     return (
       <React.Fragment>
         <Header
-          logout={logout} 
+          logout={logout}
           user={user}
           chat={chat}
           leaveChat={leave}
@@ -43,8 +49,8 @@ class ChatPage extends React.Component {
           join={join}
         />
       </React.Fragment>
-    )
+    );
   }
 }
 
-export default ChatPage
+export default ChatPage;

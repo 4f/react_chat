@@ -1,4 +1,4 @@
-import { withStyles } from 'material-ui/styles'
+import { withStyles } from 'material-ui/styles';
 
 const styles = theme => ({
   root: {
@@ -10,34 +10,34 @@ const styles = theme => ({
   },
   error: {
     margin: theme.spacing.unit,
-    background: 'red'
+    background: 'red',
   },
   success: {
     margin: theme.spacing.unit,
-    background: 'green'
+    background: 'green',
   },
   notifyCloseIcon: {
-    pointer: 'hand'
+    pointer: 'hand',
   },
   loader: {
-    width: "100%",
-    height: "100%",
-    position: "absolute",
-    display: "flex",
-    background: "white",
-    zIndex: "1999",
-    opacity: ".8"
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    display: 'flex',
+    background: 'white',
+    zIndex: '1999',
+    opacity: '.8',
   },
   avatar: {
-    transition: "all .5s ease",
-    cursor: "pointer",
-    "&:hover": {
+    transition: 'all .5s ease',
+    cursor: 'pointer',
+    '&:hover': {
       // "webkit-filter": 'blur(1px)',
       // filter: 'blur(1px)',
-      "-webkit-transform": "rotateY(180deg)",
-      transform: "rotateY(180deg)"
-    }
-  }
-})
+      '-webkit-transform': 'rotateY(180deg)',
+      transform: 'rotateY(180deg)',
+    },
+  },
+});
 
-export default (comp) => withStyles(styles)(comp)
+export default comp => withStyles(styles)(comp);

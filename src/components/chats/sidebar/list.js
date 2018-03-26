@@ -1,34 +1,36 @@
-import React from 'react'
-import List from 'material-ui/List'
-import Typography from 'material-ui/Typography'
-import Item from './item'
+import React from 'react';
+import List from 'material-ui/List';
+import Typography from 'material-ui/Typography';
+import Item from './item';
 
-import { list as applyPropTypes } from 'prop_types/chats/sidebar'
+import { list as applyPropTypes } from 'prop_types/chats/sidebar';
 
 
-const ChatList = ({ classes, chats, user, active, myHash }) => (
+const ChatList = ({
+  classes, chats, user, active, myHash,
+}) => (
   <List className={classes.chatsList}>
     { chats && chats.length
-      ? 
-        chats.map((chat) => 
-      <Item
-        key={chat._id}
-        classes={classes}
-        chat={chat}
-        active={active}
-        user={user}
-        member={myHash[chat._id]}
-      />)
+      ?
+        chats.map(chat =>
+          (<Item
+            key={chat._id}
+            classes={classes}
+            chat={chat}
+            active={active}
+            user={user}
+            member={myHash[chat._id]}
+          />))
       :
-      <Empty classes={classes} /> }
+        <Empty classes={classes} /> }
   </List>
-)
+);
 
 
-const Empty = (props) => (
+const Empty = props => (
   <Typography variant="subheading" className={props.classes.noChats}>
     There is no chats yet...
   </Typography>
-)
+);
 
-export default applyPropTypes(ChatList)
+export default applyPropTypes(ChatList);

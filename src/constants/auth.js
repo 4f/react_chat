@@ -1,14 +1,14 @@
-import {generateRequestSymbols} from "utils/helpers"
+import { generateRequestSymbols } from 'utils/helpers';
 
-const types =  generateRequestSymbols( 'AUTH', {
-  signup:       { method: "POST", path: "/signup" },
-  login:        { method: "POST", path: "/login" },
-  logout:       { method: "GET",  path: "/logout" },
-  session:      { method: "GET",  path: "/users/me" },
-  edit:         { method: "POST", path: "/users/me" }
-} )
+const types = generateRequestSymbols('AUTH', {
+  signup: { method: 'POST', path: '/signup' },
+  login: { method: 'POST', path: '/login' },
+  logout: { method: 'GET', path: '/logout' },
+  session: { method: 'GET', path: '/users/me' },
+  edit: { method: 'POST', path: '/users/me' },
+});
 
-export default types
+export default types;
 
 /*
 {
