@@ -1,0 +1,148 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Sidebar /> renders correctly 1`] = `
+<div
+  className="MuiDrawer-docked-120"
+>
+  <div
+    className="MuiPaper-root-131 MuiPaper-shadow0-133 MuiDrawer-paper-121 Sidebar-drawerPaper-107 MuiDrawer-paperAnchorLeft-122 MuiDrawer-paperAnchorDockedLeft-126"
+  >
+    <div
+      className="Sidebar-drawerHeader-108"
+    >
+      <div
+        className="MuiInput-root-158 MuiInput-fullWidth-166 MuiInput-inkbar-160 MuiInput-underline-164"
+        onBlur={[Function]}
+        onFocus={[Function]}
+      >
+        <input
+          aria-invalid={undefined}
+          aria-required={undefined}
+          autoComplete={undefined}
+          autoFocus={undefined}
+          className="MuiInput-input-167 MuiInput-inputDense-168"
+          defaultValue={undefined}
+          disabled={undefined}
+          id={undefined}
+          name={undefined}
+          onChange={[Function]}
+          onKeyDown={undefined}
+          onKeyUp={undefined}
+          placeholder="Search chats..."
+          readOnly={undefined}
+          required={undefined}
+          rows={undefined}
+          type="text"
+          value=""
+        />
+        <div
+          className="MuiInputAdornment-root-173 MuiInputAdornment-positionEnd-175"
+        >
+          <svg
+            aria-hidden="true"
+            className="MuiSvgIcon-root-176"
+            color={undefined}
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+    <hr
+      className="MuiDivider-root-183 MuiDivider-default-185"
+    />
+    List
+    new
+    <div
+      className="MuiBottomNavigation-root-188"
+    >
+      <button
+        className="MuiButtonBase-root-196 MuiBottomNavigationAction-root-189 MuiBottomNavigationAction-selected-190 Sidebar-tab-109"
+        disabled={undefined}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex={0}
+        type="button"
+      >
+        <span
+          className="MuiBottomNavigationAction-wrapper-192"
+        >
+          <svg
+            aria-hidden="true"
+            className="MuiSvgIcon-root-176"
+            color={undefined}
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"
+            />
+          </svg>
+          <span
+            className="MuiBottomNavigationAction-label-193 MuiBottomNavigationAction-selectedLabel-194"
+          >
+            My Chats
+          </span>
+        </span>
+        <span
+          className="MuiTouchRipple-root-198"
+        />
+      </button>
+      <button
+        className="MuiButtonBase-root-196 MuiBottomNavigationAction-root-189 Sidebar-tab-109"
+        disabled={undefined}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex={0}
+        type="button"
+      >
+        <span
+          className="MuiBottomNavigationAction-wrapper-192"
+        >
+          <svg
+            aria-hidden="true"
+            className="MuiSvgIcon-root-176"
+            color={undefined}
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 10.9c-.61 0-1.1.49-1.1 1.1s.49 1.1 1.1 1.1c.61 0 1.1-.49 1.1-1.1s-.49-1.1-1.1-1.1zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm2.19 12.19L6 18l3.81-8.19L18 6l-3.81 8.19z"
+            />
+          </svg>
+          <span
+            className="MuiBottomNavigationAction-label-193"
+          >
+            Explore
+          </span>
+        </span>
+        <span
+          className="MuiTouchRipple-root-198"
+        />
+      </button>
+    </div>
+  </div>
+</div>
+`;

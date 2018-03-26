@@ -1,10 +1,12 @@
 import PT from 'prop-types'
+import types from 'prop_types/types'
+
 
 export const index = (comp) => {
   comp.propTypes = {
     classes:    PT.object,
-    user:       PT.object.isRequired,
-    chat:       PT.object,
+    user:       types.user.isRequired,
+    chat:       types.chat,
     logout:     PT.func.isRequired,
     redirect:   PT.func.isRequired,
     joinChat:   PT.func.isRequired,
@@ -18,8 +20,8 @@ export const index = (comp) => {
 export const chatMenu = (comp) => {
   comp.propTypes = {
     classes:    PT.object,
-    chat:       PT.object.isRequired,
-    user:       PT.object.isRequired,
+    chat:       types.chat.isRequired,
+    user:       types.user.isRequired,
     join:       PT.func.isRequired,
     redirect:   PT.func.isRequired,
     leave:      PT.func.isRequired,
@@ -34,7 +36,7 @@ export const userMenu = (comp) => {
     logout:      PT.func.isRequired,
     edit:        PT.func.isRequired,
     toggleModal: PT.func.isRequired,
-    user:        PT.object.isRequired
+    user:        types.user.isRequired
   }
   return comp
 }
@@ -45,7 +47,7 @@ export const modal = (comp) => {
     on:          PT.bool.isRequired,
     toggle:      PT.func.isRequired,
     edit:        PT.func.isRequired,
-    user:        PT.object.isRequired
+    user:        types.user.isRequired
   }
   return comp
 }

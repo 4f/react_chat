@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux'
-import {server} from 'constants/services'
 import sockets from 'constants/sockets'
 
 const Message = {

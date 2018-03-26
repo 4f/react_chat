@@ -12,7 +12,7 @@ const active = ({_id}) => (dispatch, getState) => {
     if ( chat ) dispatch(sockets.unmountChat(chat._id));
     return Promise.resolve("Ok")
   }
-  if ( _id == (chat && chat._id) ) return Promise.resolve("nothing to change");
+  if ( _id == (chat && chat._id) ) return Promise.resolve("nothing to change");//eqeqeq
   if ( _id ) {
     if ( chat === 0 && !getState().chats.hash[_id] ) return dispatch( redirect('/chat') );
     return dispatch( chats.get({ _id }) ).then( (data) => ( !data || !data.error ) && _active() )

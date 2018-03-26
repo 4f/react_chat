@@ -54,9 +54,6 @@ class ChatMenu extends React.Component {
   render() {
     const { user, chat, classes } = this.props
     const { anchorEl } = this.state
-    console.log("HEAD", this.props)
-    debugger
-
 
     return (
       <React.Fragment>

@@ -12,8 +12,8 @@ export default combineReducers({
 
 export function construct(state){
   const {chats: {chat}, auth: {user} } = state
-  const isCreator = user && chat && chat.creator._id === user._id
-  const isMember = user && chat && chat.members.some( member => member._id === user._id )
+  const isCreator = Boolean(user && chat && chat.creator._id === user._id)
+  const isMember = Boolean( user && chat && chat.members.some( member => member._id === user._id ) )
 
   return {
     getCurrentUser: () => ({ ...user, isCreator, isMember, isInChat: isCreator || isMember }),

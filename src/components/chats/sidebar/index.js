@@ -1,5 +1,4 @@
 import React from 'react'
-import { withStyles } from 'material-ui/styles'
 import Drawer from 'material-ui/Drawer'
 import Divider from 'material-ui/Divider'
 import BottomNavigation, { BottomNavigationAction } from 'material-ui/BottomNavigation'
