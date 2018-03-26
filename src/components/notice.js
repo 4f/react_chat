@@ -25,7 +25,7 @@ class Notice extends React.Component {
       <SnackbarContent className={this.props.classes[notify.status]}
         key={notify.message}
         message={notify.message}
-        action={[ <CloseIcon onClick={this.close} classes={{ root: this.props.classes.notifyCloseIcon}} /> ]}
+        action={<CloseIcon onClick={this.close} classes={{ root: this.props.classes.notifyCloseIcon}} /> }
       />
         ) ) }
     </div>

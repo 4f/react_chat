@@ -31,7 +31,7 @@ const ChatListItem = ({ classes, chat, active, user, member }) => {
     return (
       <React.Fragment>
         <Tooltip title={wrapTooltip( senderName(chat.creator) )} placement="bottom-start">
-          <div className={cls} > {name} </div>
+          <span className={cls} > {name} </span>
         </Tooltip>
         <span> {moment(chat.createdAt).fromNow()} </span>
       </React.Fragment>
