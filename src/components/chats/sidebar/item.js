@@ -5,6 +5,8 @@ import { ListItem, ListItemText } from 'material-ui/List'
 import Tooltip from 'material-ui/Tooltip'
 import MoreIcon from 'material-ui-icons/MoreVert'
 
+import senderName from 'utils/sender-name'
+
 import Avatar from 'components/ava'
 
 import { item as applyPropTypes } from 'prop_types/chats/sidebar'
@@ -13,14 +15,24 @@ const ChatListItem = ({ classes, chat, active, user, member }) => {
   const className = () => ( active && active._id === chat._id ? classes.activeItem : classes.item )
   const wrapTooltip = (str) => str ? (str.match(/[^ ]{1,49}/g) || []).join(" ") : str
   const secondary = () => {
-    let first = "alien"
-    if (chat.creator._id === user._id)
-      first = "creator"
-    else if (member)
-      first = "member"
+    let name, cls
+    if (chat.creator._id === user._id){
+      name = "creator"
+      cls  = classes[name]
+    }
+    else if (member){
+      name = "member"
+      cls  = classes[name]
+    }
+    else {
+      name = senderName(chat.creator)
+      cls  = classes['alian']
+    }
     return (
       <React.Fragment>
-        <span className={classes[first]} > {first} </span>
+        <Tooltip title={wrapTooltip( senderName(chat.creator) )} placement="bottom-start">
+          <div className={cls} > {name} </div>
+        </Tooltip>
         <span> {moment(chat.createdAt).fromNow()} </span>
       </React.Fragment>
     )

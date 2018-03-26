@@ -53,10 +53,17 @@ const styles = theme => ({
   itemText2: {
     display: "flex",
     justifyContent: "space-between",
-    opacity: ".4"
+    opacity: ".4",
+    "&:hover": {
+      opacity: "1"
+    }
   },
-  enemy: {
-    color: "red"
+  alian: {
+    color: "red",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+    width: "120px"
   },
   member: {
     color: "blue"
