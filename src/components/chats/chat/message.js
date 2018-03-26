@@ -1,36 +1,40 @@
-import React from 'react'
-import classNames from 'classnames'
-import moment from 'moment'
-import Paper from 'material-ui/Paper'
-import Typography from 'material-ui/Typography'
-import Avatar from 'components/ava'
+import React from 'react';
+import classNames from 'classnames';
+import moment from 'moment';
+import Paper from 'material-ui/Paper';
+import Typography from 'material-ui/Typography';
+import Avatar from 'components/ava';
 
-import Color from 'utils/color-from'
+import Color from 'utils/color-from';
 
 
-const ChatMessage = ({ classes, sender, user, content, createdAt, statusMessage }) => {
-  const isMessageFromMe = user && sender._id === user._id
-  const userAvatar = <Avatar colorFrom={sender.username} label={sender.username} />
+const ChatMessage = ({
+  classes, sender, user, content, createdAt, statusMessage,
+}) => {
+  const isMessageFromMe = user && sender._id === user._id;
+  const userAvatar = <Avatar colorFrom={sender.username} label={sender.username} />;
 
-  if (statusMessage) return (
-    <div className={classes.messageWrapper}>
-      <Typography className={classes.statusMessage}>
-        <Typography variant="caption" style={{ color: Color(sender._id) }} className={classes.statusMessageUser}>
-          {sender.username}
+  if (statusMessage) {
+    return (
+      <div className={classes.messageWrapper}>
+        <Typography className={classes.statusMessage}>
+          <Typography variant="caption" style={{ color: Color(sender._id) }} className={classes.statusMessageUser}>
+            {sender.username}
+          </Typography>
+          {content}
+          <Typography variant="caption" component="span">
+            {moment(createdAt).fromNow()}
+          </Typography>
         </Typography>
-        {content}
-        <Typography variant="caption" component="span">
-          {moment(createdAt).fromNow()}
-        </Typography>
-      </Typography>
-    </div>
-  )
+      </div>
+    );
+  }
 
   return (
     <div className={classNames(classes.messageWrapper, isMessageFromMe && classes.messageWrappperFromMe)}>
       {!isMessageFromMe && userAvatar}
       <Paper className={classes.message}>
-        <Typography variant="caption" style={{ color: Color(sender._id)}}>
+        <Typography variant="caption" style={{ color: Color(sender._id) }}>
           {sender.username}
         </Typography>
         <Typography variant="body1">
@@ -42,7 +46,7 @@ const ChatMessage = ({ classes, sender, user, content, createdAt, statusMessage 
       </Paper>
       {isMessageFromMe && userAvatar}
     </div>
-  )
-}
+  );
+};
 
-export default ChatMessage
+export default ChatMessage;
