@@ -1,7 +1,7 @@
 /* eslint no-underscore-dangle: 0 */
 import SocketIOClient from 'socket.io-client'
 import types from 'constants/sockets'
-import {socketUrl} from 'constants/config'
+import config from 'constants/config'
 
 const missingSocketConnection = () => (
    { type: types.CONNECT_MISSING, payload: new Error('Missing connection!') }
@@ -15,7 +15,7 @@ const connect = () => (dispatch, getState) => {
   if (serverStatus[types.CONNECT_REQUEST]) return;
 
   dispatch({ type: types.CONNECT_REQUEST })
-  socket = SocketIOClient(socketUrl, { query: { token } })
+  socket = SocketIOClient(config.socketUrl, { query: { token } })
   if (!socket) return dispatch( missingSocketConnection() );
 
   const method_type = {
