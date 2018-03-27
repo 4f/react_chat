@@ -51,15 +51,16 @@ class ChatListMenu extends React.Component {
           disabled={this.isInChat()}
           onClick={this.onJoin}
         > <Join /> Join </MenuItem>
-        ( chat && <Divider />)
-        { chat && chat.members.map(m => 
-          <MenuItem key={m._id} >
-            <Avatar colorFrom={m.username} label={m.username} className={classes.smallAva} />
-            <div className={classes.menuName}>
-              {m.username}
-            </div>
-          </MenuItem>
-        )}
+          ( chat.members.length && 
+        <Divider /> )
+          { chat && chat.members.map(m => 
+        <MenuItem key={m._id} >
+          <Avatar colorFrom={m.username} label={m.username} className={classes.smallAva} />
+          <div className={classes.menuName}>
+            {m.username}
+          </div>
+        </MenuItem>
+          )}
 
       </Menu>
     )
