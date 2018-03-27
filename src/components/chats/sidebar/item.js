@@ -11,9 +11,10 @@ import Avatar from 'components/ava'
 
 import { item as applyPropTypes } from 'prop_types/chats/sidebar'
 
-const ChatListItem = ({ classes, chat, active, user, member }) => {
+const ChatListItem = ({ classes, chat, active, user, member, openMenu }) => {
   const className = () => ( active && active._id === chat._id ? classes.activeItem : classes.item )
   const wrapTooltip = (str) => str ? (str.match(/[^ ]{1,49}/g) || []).join(" ") : str
+  const strCountMembers = () => "members: " + (chat.members.length + 1)
   const secondary = () => {
     let name, cls
     if (chat.creator._id === user._id){
@@ -38,19 +39,24 @@ const ChatListItem = ({ classes, chat, active, user, member }) => {
     )
   }
 
-  
+  const onClickMenu = (ev) => {
+    ev.preventDefault()
+    openMenu(ev.currentTarget, chat)
+  }
   return (
     <ListItem button
       component={Link}
       to={`/chat/${chat._id}`}
       className={className()}
     >
-      <Tooltip title={wrapTooltip(chat.title)} placement="bottom-start">
+      <Tooltip title={wrapTooltip(chat.title) } placement="bottom-start">
         <Avatar colorFrom={chat._id} label={chat.title} />
       </Tooltip>
-      <MoreIcon className={classes.moreIcon} />
+      <Tooltip title={strCountMembers()} placement="bottom-start" >
+        <MoreIcon className={classes.moreIcon} onClick={onClickMenu} />
+      </Tooltip>
       <ListItemText
-        primary={chat.title}
+        primary={ chat.title }
         classes={{ primary: classes.itemText, secondary: classes.itemText2, root: classes.itemRoot }}
         secondary={secondary()}
       />

@@ -35,6 +35,9 @@ class ChatPage extends React.Component {
           chat={chat}
           chat_id={this.props.match.params._id}
           user={user}
+          join={join}
+          remove={remove}
+          leave={leave}
         />
         <Chat
           chat={chat}

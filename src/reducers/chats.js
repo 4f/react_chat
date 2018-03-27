@@ -74,7 +74,7 @@ const chat = (state = initialState.chat, action) => {
     case types.get.SUCCESS:     return Chat._chat(action)
     case types.join.SUCCESS:
     case types.leave.SUCCESS:   return Chat.updateMembers(state, action)
-    case sockets.DELETE_CHAT:   return state && state._id === Chat.id(action) ? 0 : chat
+    case sockets.DELETE_CHAT:   return state && state._id === Chat.id(action) ? 0 : state
     // case types.remove.SUCCESS:  return state && state._id === Chat.id(action) ? null : chat
     case sockets.GET_MESSAGE:   return Chat.updateMessage(state, action)
     // case types.send.SUCCESS:    

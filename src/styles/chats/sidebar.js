@@ -62,6 +62,7 @@ const styles = theme => ({
     color: "red",
     overflow: "hidden",
     textOverflow: "ellipsis",
+    display: "block",
     whiteSpace: "nowrap",
     width: "120px"
   },
@@ -96,6 +97,26 @@ const styles = theme => ({
     width: '30%',
     minWidth: '300px',
     padding: theme.spacing.unit * 3
+  },
+  smallAva: {
+    width: "30px",
+    height: "30px",
+    transition: "all .5s ease",
+    cursor: "pointer",
+    "&:hover": {
+      // "webkit-filter": 'blur(1px)',
+      // filter: 'blur(1px)',
+      "-webkit-transform": "rotateY(180deg)",
+      transform: "rotateY(180deg)"
+    }
+  },
+  menuName: {
+    marginLeft: theme.spacing.unit,
+    display: "bLock",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+    width: 120
   }
 })
 

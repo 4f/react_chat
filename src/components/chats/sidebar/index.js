@@ -42,7 +42,7 @@ class Sidebar extends React.Component {
   }
 
   render() {
-    const { create, classes, chats, chat, user, myHash } = this.props
+    const { create, classes, chats, chat, user, myHash, join, remove, leave } = this.props
     const { activeTab, search } = this.state
 
     return (
@@ -61,7 +61,16 @@ class Sidebar extends React.Component {
         </div>
         <Divider />
 
-        <List classes={classes} chats={this.filter(chats)} user={user} active={chat} myHash={myHash} />
+        <List
+          classes={classes}
+          chats={this.filter(chats)}
+          user={user}
+          active={chat}
+          myHash={myHash}
+          join={join}
+          remove={remove}
+          leave={leave}
+          />
         <NewButton classes={classes} create={create} />
 
         <BottomNavigation value={activeTab} onChange={this.onTabChange} showLabels >
