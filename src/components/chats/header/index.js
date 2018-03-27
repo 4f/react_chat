@@ -8,6 +8,8 @@ import ChatMenu from './chat_menu'
 import UserMenu from './user_menu'
 import Modal from './modal'
 
+import User from 'utils/user'
+
 import styles from 'styles/chats/header'
 import { index as applyPropTypes } from 'prop_types/chats/header'
 
@@ -18,6 +20,7 @@ class ChatHeader extends React.Component {
 
   render() {
     const { classes, user, chat, logout, redirect, joinChat, leaveChat, deleteChat, editUser } = this.props
+    const UserClass = User(user)
 
     return (
       <AppBar className={classes.appBar} color="primary">
@@ -51,7 +54,7 @@ class ChatHeader extends React.Component {
               user={user} />
           </Typography>
           
-          <Avatar colorFrom={user.username} label={user.username} />
+          {UserClass.Avatar}
           <Modal classes={classes}
             on={this.state.isModal}
             toggle={this.toggleModal}

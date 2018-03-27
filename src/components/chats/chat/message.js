@@ -5,20 +5,19 @@ import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
 import Color from 'utils/color-from'
 
-import Avatar from 'components/ava'
 import User from 'utils/user'
 
 
 const ChatMessage = ({ classes, sender, user, content, createdAt, statusMessage }) => {
   const isMessageFromMe = user && sender._id === user._id
-  const userAvatar = <Avatar colorFrom={sender.username} label={sender.username} />
-  const SenderClass = User(user)
+  const SenderClass = User(sender)
+  const Avatar = SenderClass.Avatar
 
   if (statusMessage) return (
     <div className={classes.messageWrapper}>
       <Typography className={classes.statusMessage}>
         <Typography variant="caption" style={{ color: Color(sender._id) }} className={classes.statusMessageUser}>
-          {SenderClass.title}
+          {SenderClass.name()}
         </Typography>
         {content}
         <Typography variant="caption" component="span">
@@ -30,10 +29,10 @@ const ChatMessage = ({ classes, sender, user, content, createdAt, statusMessage 
 
   return (
     <div className={classNames(classes.messageWrapper, isMessageFromMe && classes.messageWrappperFromMe)}>
-      {!isMessageFromMe && userAvatar}
+      {!isMessageFromMe && Avatar}
       <Paper className={classes.message}>
         <Typography variant="caption" style={{ color: Color(sender._id)}}>
-          {SenderClass.title}
+          {SenderClass.name()}
         </Typography>
         <Typography variant="body1">
           {content}
@@ -42,7 +41,7 @@ const ChatMessage = ({ classes, sender, user, content, createdAt, statusMessage 
           {moment(createdAt).fromNow()}
         </Typography>
       </Paper>
-      {isMessageFromMe && userAvatar}
+      {isMessageFromMe && Avatar}
     </div>
   )
 }
